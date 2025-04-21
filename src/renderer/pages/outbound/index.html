@@ -1,0 +1,98 @@
+<section id="export-section" class="section">
+  <h2 class="section-title">صفحة الصادر</h2>
+  <form class="form-container" action="">
+    <div class="input-container">
+      <label for="clientName">مطلوب من السيد</label>
+      <input class="input-field" type="text" id="clientName" />
+    </div>
+    <div class="input-container">
+      <label for="driverName">اسم السائق</label>
+      <input class="input-field" type="text" id="driverName" />
+    </div>
+    <div class="input-container">
+      <label for="country">البلد</label>
+      <input class="input-field" type="text" id="country" />
+    </div>
+    <div class="input-container">
+      <label for="leavingDate">تاريخ المغادرة</label>
+      <input class="input-field" type="date" id="leavingDate" />
+    </div>
+    <div class="input-container">
+      <label for="loadPrice">المبلغ</label>
+      <input class="input-field refill" type="number" id="loadPrice" />
+    </div>
+    <div class="input-container">
+      <label for="loadType">نوع الحمولة</label>
+      <select class="input-field refill" id="loadType">
+        <option value="" hidden>اختر</option>
+        <option value="ezz">عز</option>
+        <option value="komi">كومي</option>
+      </select>
+    </div>
+    <div class="input-container">
+      <label for="exportLoadWeight">وزن الحمولة</label>
+      <input class="input-field refill" type="text" id="exportLoadWeight" />
+    </div>
+    <div class="input-container">
+      <label for="unitPrice">سعر الوحدة</label>
+      <input class="input-field refill" type="text" id="unitPrice" />
+    </div>
+    <div class="input-container">
+      <label for="loadCategory">الصنف</label>
+      <select class="input-field refill" id="loadCategory">
+        <option value="" hidden>اختر</option>
+        <option value="16">16</option>
+        <option value="12">12</option>
+        <option value="10">10</option>
+        <option value="8">8</option>
+        <option value="7">7</option>
+      </select>
+    </div>
+    <div class="input-container">
+      <label for="totalPrice">الاجمالي</label>
+      <input
+        class="input-field refill"
+        type="number"
+        id="totalPrice"
+        placeholder="300,000.00"
+        readonly
+      />
+    </div>
+    <div class="btns-container">
+      <button class="btn-style" id="exportAddLoad" type="submit">اضافة</button>
+      <button class="btn-style" type="button">حفظ</button>
+      <div class="checkbox-container">
+        <input type="checkbox" id="exportPrint" />
+        <label for="exportPrint">طباعة</label>
+      </div>
+    </div>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>نوع الحمولة</th>
+        <th>المبلغ</th>
+        <th>وزن الحمولة</th>
+        <th>سعر الوحدة</th>
+        <th>الصنف</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>كومي</td>
+        <td>200,000</td>
+        <td>5 طن</td>
+        <td>10000</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>عز</td>
+        <td>100,000</td>
+        <td>2 طن</td>
+        <td>5000</td>
+        <td>8</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

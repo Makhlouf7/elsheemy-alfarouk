@@ -1,0 +1,57 @@
+<section id="import-section" class="section">
+  <h2 class="section-title">صفحة الوارد</h2>
+  <form class="form-container" action="">
+    <div class="input-container">
+      <label for="name">الاسم</label>
+      <input class="input-field" type="text" id="name" name="name" />
+    </div>
+    <div class="input-container">
+      <label for="loadWeight">وزن الحمولة</label>
+      <input
+        class="input-field"
+        type="text"
+        id="loadWeight"
+        name="loadWeight"
+      />
+    </div>
+    <div class="input-container">
+      <label for="importerName">اسم المورد</label>
+      <input
+        class="input-field"
+        type="text"
+        id="importerName"
+        name="importerName"
+      />
+    </div>
+    <div class="input-container">
+      <label for="loadType">نوع الحمولة</label>
+      <select class="input-field" id="loadType" name="loadType">
+        <option value="" hidden>اختر</option>
+        <option value="ezz">عز</option>
+        <option value="komi">كومي</option>
+      </select>
+    </div>
+    <div class="input-container">
+      <label for="carNumber">رقم السيارة</label>
+      <input class="input-field" type="text" id="carNumber" name="carNumber" />
+    </div>
+    <div class="input-container">
+      <label for="category">الصنف</label>
+      <select class="input-field" id="category" name="category">
+        <option value="" hidden>اختر</option>
+        <option value="16">16</option>
+        <option value="12">12</option>
+        <option value="10">10</option>
+        <option value="8">8</option>
+        <option value="7">7</option>
+      </select>
+    </div>
+    <div class="btns-container">
+      <button class="btn-style" id="importSave" type="button">حفظ</button>
+      <div class="checkbox-container">
+        <input type="checkbox" id="importPrint" />
+        <label for="importPrint">طباعة</label>
+      </div>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,134 @@
+/* General Style */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+body {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+select {
+  border-left: 10px solid transparent !important;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #fff;
+}
+.width-100 {
+  width: 100% !important;
+}
+.section {
+  padding: 15px 20px;
+  margin: 25px;
+}
+/* Nav Style */
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  padding: 15px;
+  background-color: #e6a800;
+  font-size: 22px;
+  font-weight: bolder;
+  padding-right: 30px;
+}
+.nav-item {
+  cursor: pointer;
+}
+
+/* Form Style */
+.input-field {
+  padding: 8px 10px;
+  font-size: large;
+  border: none;
+  outline: 3px solid #966e00;
+  &:focus {
+    box-shadow: 0px 0px 15px 4px #966e00;
+  }
+}
+.btn-style {
+  padding: 6px 10px;
+  font-size: large;
+  background-color: #e6a800;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    background-color: #d09b09;
+  }
+}
+
+.form-container {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.form-container .input-container {
+  flex: 1 1 calc(50% - 15px);
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.btns-container,
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Table Style */
+.filter-container {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+  max-height: calc(100vh - 250px);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.table th {
+  background-color: #f4b731;
+  color: #fff;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ddd;
+}
+
+.table td {
+  padding: 4px;
+  text-align: center;
+  border: 1px solid #ddd;
+  color: #1e1e1e;
+  background-color: #f9f9f9;
+}
+
+@media (max-width: 600px) {
+  .table {
+    font-size: 14px;
+  }
+}
+
+/* Script Classes */
+.hidden {
+  display: none !important;
+}

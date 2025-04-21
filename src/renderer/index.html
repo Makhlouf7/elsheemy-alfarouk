@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ELSHEEMY ALFAROUK</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul class="navbar">
+        <li class="nav-item" data-page="./pages/inbound/index.html">وارد</li>
+        <li class="nav-item" data-page="./pages/outbound/index.html">منصرف</li>
+        <li class="nav-item" data-target="data-section">اظهار البيانات</li>
+        <li class="nav-item" data-page="./pages/reports/index.html">
+          التقارير
+        </li>
+      </ul>
+    </nav>
+
+    <main id="content">
+      <section id="data-section" class="hidden section">
+        <h2 class="section-title">صفحة البيانات</h2>
+        <div class="filter-container">
+          <input
+            class="input-field"
+            type="date"
+            id="filterDate"
+            name="filterDate"
+          />
+          <button class="btn-style" type="button" id="showDataBtn">
+            اظهار البيانات
+          </button>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>اليوم</th>
+                <th>نوع الحمولة</th>
+                <th>الصنف</th>
+                <th>الوزن</th>
+                <th>الاجمالي</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr>
+                <td>الخميس</td>
+                <td>عز</td>
+                <td>16</td>
+                <td>20 طن</td>
+                <td>250,000</td>
+              </tr>
+              <tr>
+                <td>الثلاثاء</td>
+                <td>كومي</td>
+                <td>8</td>
+                <td>10 طن</td>
+                <td>250,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="./renderer.js"></script>
+  </body>
+</html>

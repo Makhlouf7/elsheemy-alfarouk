@@ -1,0 +1,16 @@
+{
+  "name": "elsheemy-alfarouk",
+  "version": "1.0.0",
+  "description": "Create a desktop app for an iron factory where it need to make receipt for the imports and exports and have access to all the receipts.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ./src/main/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ahmed Makhlouf",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^35.1.5"
+  }
+}
