@@ -11,6 +11,6 @@
   "author": "Ahmed Makhlouf",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^35.1.5"
+    "electron": "^22.3.27"
   }
 }

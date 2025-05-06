@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>التقارير</title>
+    <title>خزنة عمال وموظفين</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -92,81 +92,99 @@
       <!-- Main Content -->
       <main class="main-content">
         <div class="page-header">
-          <h1>التقارير</h1>
+          <h1>خزنة عمال وموظفين</h1>
         </div>
 
         <div class="page-content">
           <div class="form-section">
-            <h2>إنشاء تقرير</h2>
-            <form id="report-form">
+            <h2>إضافة معاملة جديدة</h2>
+            <form id="employees-cash-form">
               <div class="form-group">
-                <label for="report-type">نوع التقرير</label>
-                <select id="report-type" required>
-                  <option value="">اختر نوع التقرير</option>
-                  <option value="financial">تقرير مالي</option>
-                  <option value="sales">تقرير المبيعات</option>
-                  <option value="inventory">تقرير المخزون</option>
-                  <option value="employees">تقرير الموظفين</option>
-                  <option value="attendance">تقرير الحضور</option>
-                  <option value="reservations">تقرير الحجزات</option>
+                <label for="date">التاريخ</label>
+                <input type="date" id="date" required />
+              </div>
+              <div class="form-group">
+                <label for="employee">الموظف/العامل</label>
+                <select id="employee" required>
+                  <option value="">اختر الموظف/العامل</option>
+                  <option value="employee1">محمد أحمد</option>
+                  <option value="employee2">علي محمود</option>
+                  <option value="employee3">أحمد سعيد</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="date-range">الفترة الزمنية</label>
-                <select id="date-range" required>
-                  <option value="">اختر الفترة</option>
-                  <option value="today">اليوم</option>
-                  <option value="week">الأسبوع الحالي</option>
-                  <option value="month">الشهر الحالي</option>
-                  <option value="quarter">الربع الحالي</option>
-                  <option value="year">السنة الحالية</option>
-                  <option value="custom">فترة مخصصة</option>
+                <label for="type">نوع المعاملة</label>
+                <select id="type" required>
+                  <option value="">اختر نوع المعاملة</option>
+                  <option value="salary">راتب</option>
+                  <option value="advance">سلفة</option>
+                  <option value="bonus">مكافأة</option>
+                  <option value="deduction">خصم</option>
                 </select>
-              </div>
-              <div class="form-group custom-date-range" style="display: none">
-                <label for="start-date">من تاريخ</label>
-                <input type="date" id="start-date" />
-                <label for="end-date">إلى تاريخ</label>
-                <input type="date" id="end-date" />
               </div>
               <div class="form-group">
-                <label for="format">صيغة التقرير</label>
-                <select id="format" required>
-                  <option value="html">عرض في المتصفح</option>
-                  <option value="pdf">PDF</option>
-                  <option value="excel">Excel</option>
-                </select>
+                <label for="amount">المبلغ</label>
+                <input type="number" id="amount" min="0" step="0.01" required />
+              </div>
+              <div class="form-group">
+                <label for="description">الوصف</label>
+                <textarea id="description" rows="3" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="reference">المرجع</label>
+                <input type="text" id="reference" required />
               </div>
               <div class="form-actions">
                 <button
                   type="button"
-                  class="btn btn-primary"
-                  id="generate-report"
+                  class="btn btn-secondary"
+                  id="clear-fields"
                 >
-                  إنشاء التقرير
+                  مسح الحقول
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="add-transaction"
+                >
+                  إضافة المعاملة
                 </button>
               </div>
             </form>
           </div>
 
-          <div class="report-section">
-            <div class="report-header">
-              <h2>عرض التقرير</h2>
-              <div class="report-actions">
-                <button class="btn btn-primary" id="print-report">طباعة</button>
-                <button class="btn btn-primary" id="download-report">
-                  تحميل
+          <div class="table-section">
+            <div class="table-header">
+              <h2>قائمة المعاملات</h2>
+              <div class="table-actions">
+                <input
+                  type="text"
+                  class="search-input"
+                  id="search-transactions"
+                  placeholder="بحث..."
+                />
+                <button class="btn btn-primary" id="update-transactions">
+                  تحديث
                 </button>
               </div>
             </div>
-            <div class="report-container" id="report-container">
-              <!-- Report content will be displayed here -->
-              <div class="no-report">
-                <i class="fas fa-chart-bar"></i>
-                <p>
-                  اختر نوع التقرير والفترة الزمنية ثم اضغط على "إنشاء التقرير"
-                </p>
-              </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>الموظف/العامل</th>
+                    <th>نوع المعاملة</th>
+                    <th>المبلغ</th>
+                    <th>الوصف</th>
+                    <th>المرجع</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="transactions-table-body">
+                  <!-- Transactions will be added here dynamically -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

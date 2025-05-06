@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>التقارير</title>
+    <title>صفحة الصادر</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./style.css" />
   </head>
-
   <body>
     <div class="container">
       <!-- Sidebar -->
@@ -88,85 +87,111 @@
           </a>
         </ul>
       </nav>
-
       <!-- Main Content -->
       <main class="main-content">
         <div class="page-header">
-          <h1>التقارير</h1>
+          <h1>صفحة الصادر</h1>
         </div>
 
         <div class="page-content">
           <div class="form-section">
-            <h2>إنشاء تقرير</h2>
-            <form id="report-form">
+            <h2>بيانات الفاتورة</h2>
+            <form id="invoice-form">
               <div class="form-group">
-                <label for="report-type">نوع التقرير</label>
-                <select id="report-type" required>
-                  <option value="">اختر نوع التقرير</option>
-                  <option value="financial">تقرير مالي</option>
-                  <option value="sales">تقرير المبيعات</option>
-                  <option value="inventory">تقرير المخزون</option>
-                  <option value="employees">تقرير الموظفين</option>
-                  <option value="attendance">تقرير الحضور</option>
-                  <option value="reservations">تقرير الحجزات</option>
+                <label for="customer-name">اسم العميل</label>
+                <input type="text" id="customer-name" required />
+              </div>
+              <div class="form-group">
+                <label for="country">البلد</label>
+                <input type="text" id="country" required />
+              </div>
+              <div class="form-group">
+                <label for="date">التاريخ</label>
+                <input type="date" id="date" required />
+              </div>
+              <div class="form-group">
+                <label for="driver-name">اسم السائق</label>
+                <input type="text" id="driver-name" required />
+              </div>
+            </form>
+
+            <h2>بيانات المنتج</h2>
+            <form id="product-form">
+              <div class="form-group">
+                <label for="load-type">نوع الحمولة</label>
+                <select id="load-type" required>
+                  <option value="az">عز</option>
+                  <option value="estithmari">استثماري</option>
+                  <option value="komy">كومي</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="date-range">الفترة الزمنية</label>
-                <select id="date-range" required>
-                  <option value="">اختر الفترة</option>
-                  <option value="today">اليوم</option>
-                  <option value="week">الأسبوع الحالي</option>
-                  <option value="month">الشهر الحالي</option>
-                  <option value="quarter">الربع الحالي</option>
-                  <option value="year">السنة الحالية</option>
-                  <option value="custom">فترة مخصصة</option>
+                <label for="category">الصنف</label>
+                <select id="category" required>
+                  <option value="16">16</option>
+                  <option value="12">12</option>
+                  <option value="10">10</option>
+                  <option value="8">8</option>
+                  <option value="7">7</option>
                 </select>
-              </div>
-              <div class="form-group custom-date-range" style="display: none">
-                <label for="start-date">من تاريخ</label>
-                <input type="date" id="start-date" />
-                <label for="end-date">إلى تاريخ</label>
-                <input type="date" id="end-date" />
               </div>
               <div class="form-group">
-                <label for="format">صيغة التقرير</label>
-                <select id="format" required>
-                  <option value="html">عرض في المتصفح</option>
-                  <option value="pdf">PDF</option>
-                  <option value="excel">Excel</option>
-                </select>
+                <label for="quantity">الكمية</label>
+                <input type="number" id="quantity" required />
+              </div>
+              <div class="form-group">
+                <label for="shakara">شكاره</label>
+                <input type="number" id="shakara" required />
+              </div>
+              <div class="form-group">
+                <label for="price">السعر</label>
+                <input type="number" id="price" required />
               </div>
               <div class="form-actions">
                 <button
                   type="button"
                   class="btn btn-primary"
-                  id="generate-report"
+                  id="add-to-invoice"
                 >
-                  إنشاء التقرير
+                  إضافة إلى الفاتورة
+                </button>
+                <button type="reset" class="btn btn-secondary">
+                  مسح الحقول
                 </button>
               </div>
             </form>
           </div>
-
-          <div class="report-section">
-            <div class="report-header">
-              <h2>عرض التقرير</h2>
-              <div class="report-actions">
-                <button class="btn btn-primary" id="print-report">طباعة</button>
-                <button class="btn btn-primary" id="download-report">
-                  تحميل
-                </button>
+          <div class="table-section">
+            <div class="table-header">
+              <h2>منتجات الفاتورة</h2>
+              <div class="table-actions">
+                <button class="btn btn-primary" id="save-invoice">حفظ</button>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="print" /> طباعة
+                </label>
+                <button class="btn btn-primary">تصدير Excel</button>
               </div>
             </div>
-            <div class="report-container" id="report-container">
-              <!-- Report content will be displayed here -->
-              <div class="no-report">
-                <i class="fas fa-chart-bar"></i>
-                <p>
-                  اختر نوع التقرير والفترة الزمنية ثم اضغط على "إنشاء التقرير"
-                </p>
-              </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>نوع الحمولة</th>
+                    <th>الصنف</th>
+                    <th>الكمية</th>
+                    <th>شكاره</th>
+                    <th>السعر</th>
+                    <th>الإجمالي</th>
+                    <th>إجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="invoice-table-body">
+                  <!-- Table data will be populated here -->
+                </tbody>
+              </table>
+            </div>
+            <div class="invoice-total">
+              <h3>إجمالي الفاتورة: <span id="total-amount">0</span> جنيه</h3>
             </div>
           </div>
         </div>

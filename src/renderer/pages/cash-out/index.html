@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>التقارير</title>
+    <title>منصرف خزنة</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -92,81 +92,85 @@
       <!-- Main Content -->
       <main class="main-content">
         <div class="page-header">
-          <h1>التقارير</h1>
+          <h1>منصرف خزنة</h1>
         </div>
 
         <div class="page-content">
           <div class="form-section">
-            <h2>إنشاء تقرير</h2>
-            <form id="report-form">
+            <h2>إضافة منصرف جديد</h2>
+            <form id="cash-out-form">
               <div class="form-group">
-                <label for="report-type">نوع التقرير</label>
-                <select id="report-type" required>
-                  <option value="">اختر نوع التقرير</option>
-                  <option value="financial">تقرير مالي</option>
-                  <option value="sales">تقرير المبيعات</option>
-                  <option value="inventory">تقرير المخزون</option>
-                  <option value="employees">تقرير الموظفين</option>
-                  <option value="attendance">تقرير الحضور</option>
-                  <option value="reservations">تقرير الحجزات</option>
+                <label for="date">التاريخ</label>
+                <input type="date" id="date" required />
+              </div>
+              <div class="form-group">
+                <label for="amount">المبلغ</label>
+                <input type="number" id="amount" min="0" step="0.01" required />
+              </div>
+              <div class="form-group">
+                <label for="category">الفئة</label>
+                <select id="category" required>
+                  <option value="">اختر الفئة</option>
+                  <option value="suppliers">موردين</option>
+                  <option value="employees">عمال وموظفين</option>
+                  <option value="expenses">مصروفات</option>
+                  <option value="other">أخرى</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="date-range">الفترة الزمنية</label>
-                <select id="date-range" required>
-                  <option value="">اختر الفترة</option>
-                  <option value="today">اليوم</option>
-                  <option value="week">الأسبوع الحالي</option>
-                  <option value="month">الشهر الحالي</option>
-                  <option value="quarter">الربع الحالي</option>
-                  <option value="year">السنة الحالية</option>
-                  <option value="custom">فترة مخصصة</option>
-                </select>
-              </div>
-              <div class="form-group custom-date-range" style="display: none">
-                <label for="start-date">من تاريخ</label>
-                <input type="date" id="start-date" />
-                <label for="end-date">إلى تاريخ</label>
-                <input type="date" id="end-date" />
+                <label for="description">الوصف</label>
+                <textarea id="description" rows="3" required></textarea>
               </div>
               <div class="form-group">
-                <label for="format">صيغة التقرير</label>
-                <select id="format" required>
-                  <option value="html">عرض في المتصفح</option>
-                  <option value="pdf">PDF</option>
-                  <option value="excel">Excel</option>
-                </select>
+                <label for="reference">المرجع</label>
+                <input type="text" id="reference" required />
               </div>
               <div class="form-actions">
                 <button
                   type="button"
-                  class="btn btn-primary"
-                  id="generate-report"
+                  class="btn btn-secondary"
+                  id="clear-fields"
                 >
-                  إنشاء التقرير
+                  مسح الحقول
+                </button>
+                <button type="button" class="btn btn-primary" id="add-cash-out">
+                  إضافة المنصرف
                 </button>
               </div>
             </form>
           </div>
 
-          <div class="report-section">
-            <div class="report-header">
-              <h2>عرض التقرير</h2>
-              <div class="report-actions">
-                <button class="btn btn-primary" id="print-report">طباعة</button>
-                <button class="btn btn-primary" id="download-report">
-                  تحميل
+          <div class="table-section">
+            <div class="table-header">
+              <h2>قائمة المنصرفات</h2>
+              <div class="table-actions">
+                <input
+                  type="text"
+                  class="search-input"
+                  id="search-cash-out"
+                  placeholder="بحث..."
+                />
+                <button class="btn btn-primary" id="update-cash-out">
+                  تحديث
                 </button>
               </div>
             </div>
-            <div class="report-container" id="report-container">
-              <!-- Report content will be displayed here -->
-              <div class="no-report">
-                <i class="fas fa-chart-bar"></i>
-                <p>
-                  اختر نوع التقرير والفترة الزمنية ثم اضغط على "إنشاء التقرير"
-                </p>
-              </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>المبلغ</th>
+                    <th>الفئة</th>
+                    <th>الوصف</th>
+                    <th>المرجع</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="cash-out-table-body">
+                  <!-- Cash-out records will be added here dynamically -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

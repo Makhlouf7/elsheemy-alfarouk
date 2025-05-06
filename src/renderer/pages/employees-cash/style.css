@@ -1,4 +1,4 @@
-/* Attendance Page Specific Styles */
+/* Employees Cash Page Specific Styles */
 .page-content {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -110,23 +110,6 @@ tr:hover {
     background-color: #f8f9fa;
 }
 
-/* Status Colors */
-.status-present {
-    color: #28a745;
-}
-
-.status-absent {
-    color: #dc3545;
-}
-
-.status-late {
-    color: #ffc107;
-}
-
-.status-leave {
-    color: #17a2b8;
-}
-
 /* Buttons */
 .btn {
     padding: 0.75rem 1.5rem;
@@ -174,6 +157,33 @@ tr:hover {
 .action-buttons .btn {
     padding: 0.5rem;
     font-size: 0.875rem;
+}
+
+/* Total Amount */
+.total-amount {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.total-amount-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.25rem;
+}
+
+.total-label {
+    color: #333;
+    font-weight: 600;
+}
+
+.total-value {
+    color: #28a745;
+    font-weight: 700;
 }
 
 /* Responsive Design */
