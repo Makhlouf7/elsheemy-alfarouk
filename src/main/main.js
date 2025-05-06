@@ -11,7 +11,7 @@ const createWindow = () => {
     icon: path.join(__dirname, "../assets/logo_favicon.ico"),
   });
 
-  mainWindow.loadFile("../renderer/index.html");
+  mainWindow.loadFile("../renderer/pages/incoming/index.html");
 };
 
 app.whenReady().then(() => {
