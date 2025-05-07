@@ -95,20 +95,10 @@ function updateSuppliersTable() {
   });
 }
 
-// Edit supplier
+// Edit supplier - redirect to edit page
 function editSupplier(id) {
-  const supplier = suppliers.find((s) => s.id === id);
-  if (supplier) {
-    supplierNameInput.value = supplier.name;
-    phoneInput.value = supplier.phone;
-    addressInput.value = supplier.address;
-    balanceInput.value = supplier.balance;
-    notesInput.value = supplier.notes;
-
-    // Remove the supplier from the list
-    suppliers = suppliers.filter((s) => s.id !== id);
-    updateSuppliersTable();
-  }
+  // Redirect to the edit supplier page with the supplier ID
+  window.location.href = `../edit-supplier/index.html?id=${id}`;
 }
 
 // Delete supplier
