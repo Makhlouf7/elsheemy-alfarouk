@@ -97,7 +97,8 @@ td {
 }
 
 th {
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #1e90ff, #0066cc); /* تدرج أزرق */
+  color: white;
   font-weight: bold;
 }
 

@@ -77,6 +77,9 @@ function updateSuppliersTable() {
             <td>${supplier.notes || "-"}</td>
             <td>
                 <div class="action-buttons">
+                    <a href="../supplier-profile/index.html?id=${supplier.id}" class="btn btn-info">
+                        <span class="icon icon-eye"></span>
+                    </a>
                     <button class="btn btn-primary" onclick="editSupplier(${supplier.id
       })">
                         <span class="icon icon-edit"></span>
@@ -145,6 +148,9 @@ searchInput.addEventListener("input", function (e) {
             <td>${supplier.notes || "-"}</td>
             <td>
                 <div class="action-buttons">
+                    <a href="../supplier-profile/index.html?id=${supplier.id}" class="btn btn-info">
+                        <span class="icon icon-eye"></span>
+                    </a>
                     <button class="btn btn-primary" onclick="editSupplier(${supplier.id
       })">
                         <span class="icon icon-edit"></span>

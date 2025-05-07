@@ -1,0 +1,103 @@
+/* Supplier profile specific styles */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.supplier-info-section,
+.transactions-section,
+.products-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.supplier-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.supplier-info-item {
+  margin-bottom: 10px;
+}
+
+.supplier-info-item h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.supplier-info-item p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.supplier-header {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.supplier-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.supplier-avatar .icon {
+  font-size: 40px;
+  color: #666;
+}
+
+.supplier-name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.supplier-type {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0 0 0;
+}
+
+.total-amount {
+  margin-top: 15px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.positive-amount {
+  color: #28a745;
+}
+
+.negative-amount {
+  color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .supplier-info {
+    grid-template-columns: 1fr;
+  }
+
+  .supplier-header {
+    grid-column: 1;
+  }
+}
