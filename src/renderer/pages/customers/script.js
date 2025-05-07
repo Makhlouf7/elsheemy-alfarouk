@@ -77,15 +77,17 @@ function updateCustomersTable() {
             <td>${customer.notes || "-"}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editCustomer(${
-                      customer.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <button class="btn btn-info" onclick="viewCustomerProfile(${customer.id
+      })">
+                        <span class="icon icon-eye"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteCustomer(${
-                      customer.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-primary" onclick="editCustomer(${customer.id
+      })">
+                        <span class="icon icon-edit"></span>
+                    </button>
+                    <button class="btn btn-danger" onclick="deleteCustomer(${customer.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>
@@ -96,18 +98,8 @@ function updateCustomersTable() {
 
 // Edit customer
 function editCustomer(id) {
-  const customer = customers.find((c) => c.id === id);
-  if (customer) {
-    customerNameInput.value = customer.name;
-    phoneInput.value = customer.phone;
-    addressInput.value = customer.address;
-    balanceInput.value = customer.balance;
-    notesInput.value = customer.notes;
-
-    // Remove the customer from the list
-    customers = customers.filter((c) => c.id !== id);
-    updateCustomersTable();
-  }
+  // Navigate to the edit page with the customer ID
+  window.location.href = `../edit/index.html?id=${id}`;
 }
 
 // Delete customer
@@ -118,11 +110,16 @@ function deleteCustomer(id) {
   }
 }
 
+// View customer profile
+function viewCustomerProfile(id) {
+  window.location.href = `../profile/index.html?id=${id}`;
+}
+
 // Format currency
 function formatCurrency(amount) {
-  return new Intl.NumberFormat("ar-SA", {
+  return new Intl.NumberFormat("ar-EG", {
     style: "currency",
-    currency: "SAR",
+    currency: "EGP",
   }).format(amount);
 }
 
@@ -147,15 +144,17 @@ searchInput.addEventListener("input", function (e) {
             <td>${customer.notes || "-"}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editCustomer(${
-                      customer.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <button class="btn btn-info" onclick="viewCustomerProfile(${customer.id
+      })">
+                        <span class="icon icon-eye"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteCustomer(${
-                      customer.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-primary" onclick="editCustomer(${customer.id
+      })">
+                        <span class="icon icon-edit"></span>
+                    </button>
+                    <button class="btn btn-danger" onclick="deleteCustomer(${customer.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>

@@ -106,15 +106,16 @@ function updateTransactionsTable() {
             <td>${transaction.reference}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editTransaction(${
-                      transaction.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <a href="../employee-profile/index.html?id=${getEmployeeId(transaction.employee)}" class="btn btn-info">
+                        <span class="icon icon-eye"></span>
+                    </a>
+                    <button class="btn btn-primary" onclick="editTransaction(${transaction.id
+      })">
+                        <span class="icon icon-edit"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteTransaction(${
-                      transaction.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="deleteTransaction(${transaction.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>
@@ -160,11 +161,12 @@ function deleteTransaction(id) {
 // Format date to Gregorian format
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString("ar-EG", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  // Format as DD/MM/YYYY
+  return `${day}/${month}/${year}`;
 }
 
 // Format currency
@@ -183,6 +185,17 @@ function getEmployeeName(employeeId) {
     employee3: "أحمد سعيد",
   };
   return employees[employeeId] || employeeId;
+}
+
+// Get employee ID for profile link
+function getEmployeeId(employeeId) {
+  // Map from employee IDs in this page to employee IDs in the profile page
+  const employeeIdMap = {
+    employee1: 1,
+    employee2: 2,
+    employee3: 3,
+  };
+  return employeeIdMap[employeeId] || 1; // Default to 1 if not found
 }
 
 // Get transaction type in Arabic
@@ -225,15 +238,16 @@ searchInput.addEventListener("input", function (e) {
             <td>${transaction.reference}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editTransaction(${
-                      transaction.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <a href="../employee-profile/index.html?id=${getEmployeeId(transaction.employee)}" class="btn btn-info">
+                        <span class="icon icon-eye"></span>
+                    </a>
+                    <button class="btn btn-primary" onclick="editTransaction(${transaction.id
+      })">
+                        <span class="icon icon-edit"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteTransaction(${
-                      transaction.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="deleteTransaction(${transaction.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>

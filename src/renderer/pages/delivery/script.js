@@ -73,15 +73,13 @@ function updateAppointmentsTable() {
             <td>${appointment.notes || "-"}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editAppointment(${
-                      appointment.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <button class="btn btn-primary" onclick="editAppointment(${appointment.id
+      })">
+                        <span class="icon icon-edit"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteAppointment(${
-                      appointment.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="deleteAppointment(${appointment.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>
@@ -113,14 +111,15 @@ function deleteAppointment(id) {
   }
 }
 
-// Format date to Arabic format
+// Format date to Gregorian format
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString("ar-SA", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  // Format as DD/MM/YYYY
+  return `${day}/${month}/${year}`;
 }
 
 // Update appointments button

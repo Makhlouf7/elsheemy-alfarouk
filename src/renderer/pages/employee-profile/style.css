@@ -1,0 +1,95 @@
+/* Employee profile specific styles */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.employee-info-section,
+.transactions-section,
+.attendance-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.employee-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.employee-info-item {
+  margin-bottom: 10px;
+}
+
+.employee-info-item h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.employee-info-item p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.employee-header {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.employee-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.employee-avatar .icon {
+  font-size: 40px;
+  color: #666;
+}
+
+.employee-name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.employee-job-title {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0 0 0;
+}
+
+.total-amount {
+  margin-top: 15px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .employee-info {
+    grid-template-columns: 1fr;
+  }
+
+  .employee-header {
+    grid-column: 1;
+  }
+}

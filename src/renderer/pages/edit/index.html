@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>الحضور والانصراف</title>
-
+    <title>تعديل بيانات العميل</title>
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
@@ -37,7 +36,7 @@
             </li>
           </a>
           <a href="../customers/index.html">
-            <li class="nav-item">
+            <li class="nav-item active">
               <span class="icon icon-users"></span>
               <span>حساب العملاء</span>
             </li>
@@ -67,7 +66,7 @@
             </li>
           </a>
           <a href="../attendance/index.html">
-            <li class="nav-item active">
+            <li class="nav-item">
               <span class="icon icon-clock"></span>
               <span>الحضور والانصراف</span>
             </li>
@@ -90,105 +89,52 @@
       <!-- Main Content -->
       <main class="main-content">
         <div class="page-header">
-          <h1>الحضور والانصراف</h1>
+          <h1>تعديل بيانات العميل</h1>
+          <a href="../customers/index.html" class="btn btn-secondary">
+            <span class="icon icon-arrow-right"></span>
+            العودة لقائمة العملاء
+          </a>
         </div>
 
-        <div class="page-content">
+        <div class="edit-content">
           <div class="form-section">
-            <h2>تسجيل الحضور والانصراف</h2>
-            <form id="attendance-form">
+            <h2>تعديل بيانات العميل</h2>
+            <form id="edit-customer-form">
+              <input type="hidden" id="customer-id">
               <div class="form-group">
-                <label for="date">التاريخ</label>
-                <input type="date" id="date" required />
+                <label for="customer-name">اسم العميل</label>
+                <input type="text" id="customer-name" required />
               </div>
               <div class="form-group">
-                <label for="employee">الموظف/العامل</label>
-                <select id="employee" required>
-                  <option value="">اختر الموظف/العامل</option>
-                  <option value="employee1">محمد أحمد</option>
-                  <option value="employee2">علي محمود</option>
-                  <option value="employee3">أحمد سعيد</option>
-                </select>
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" required />
               </div>
               <div class="form-group">
-                <label for="status">الحالة</label>
-                <select id="status" required>
-                  <option value="">اختر الحالة</option>
-                  <option value="present">حضور</option>
-                  <option value="absent">غياب</option>
-                  <option value="late">تأخير</option>
-                  <option value="leave">إجازة</option>
-                </select>
+                <label for="address">العنوان</label>
+                <input type="text" id="address" required />
               </div>
               <div class="form-group">
-                <label for="check-in">وقت الحضور</label>
-                <input type="time" id="check-in" required />
-              </div>
-              <div class="form-group">
-                <label for="check-out">وقت الانصراف</label>
-                <input type="time" id="check-out" required />
+                <label for="balance">الرصيد</label>
+                <input type="number" id="balance" required />
               </div>
               <div class="form-group">
                 <label for="notes">ملاحظات</label>
                 <textarea id="notes" rows="3"></textarea>
               </div>
               <div class="form-actions">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="clear-fields"
-                >
-                  مسح الحقول
+                <button type="button" class="btn btn-secondary" id="cancel-edit">
+                  إلغاء
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="add-attendance"
-                >
-                  إضافة تسجيل
+                <button type="button" class="btn btn-primary" id="save-customer">
+                  حفظ التعديلات
                 </button>
               </div>
             </form>
-          </div>
-
-          <div class="table-section">
-            <div class="table-header">
-              <h2>سجلات الحضور والانصراف</h2>
-              <div class="table-actions">
-                <input
-                  type="text"
-                  class="search-input"
-                  id="search-attendance"
-                  placeholder="بحث..."
-                />
-                <button class="btn btn-primary" id="update-attendance">
-                  تحديث
-                </button>
-              </div>
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>التاريخ</th>
-                    <th>الموظف/العامل</th>
-                    <th>الحالة</th>
-                    <th>وقت الحضور</th>
-                    <th>وقت الانصراف</th>
-                    <th>ملاحظات</th>
-                    <th>الإجراءات</th>
-                  </tr>
-                </thead>
-                <tbody id="attendance-table-body">
-                  <!-- Attendance records will be added here dynamically -->
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
       </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

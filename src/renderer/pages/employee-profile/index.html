@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>خزنة عمال وموظفين</title>
+    <title>بروفايل الموظف</title>
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
   </head>
-
   <body>
     <div class="container">
       <!-- Sidebar -->
@@ -60,13 +59,13 @@
             </li>
           </a>
           <a href="../employees-cash/index.html">
-            <li class="nav-item active">
+            <li class="nav-item">
               <span class="icon icon-user-tie"></span>
               <span>خزنة عمال وموظفين</span>
             </li>
           </a>
           <a href="../employees/index.html">
-            <li class="nav-item">
+            <li class="nav-item active">
               <span class="icon icon-users-cog"></span>
               <span>إدارة الموظفين</span>
             </li>
@@ -95,101 +94,66 @@
       <!-- Main Content -->
       <main class="main-content">
         <div class="page-header">
-          <h1>خزنة عمال وموظفين</h1>
-          <a href="../employees/index.html" class="btn btn-primary">
-            <span class="icon icon-users-cog"></span>
-            إدارة الموظفين
+          <h1>بروفايل الموظف</h1>
+          <a href="../employees/index.html" class="btn btn-secondary">
+            <span class="icon icon-arrow-right"></span>
+            العودة لقائمة الموظفين
           </a>
         </div>
 
-        <div class="page-content">
-          <div class="form-section">
-            <h2>إضافة معاملة جديدة</h2>
-            <form id="employees-cash-form">
-              <div class="form-group">
-                <label for="date">التاريخ</label>
-                <input type="date" id="date" required />
-              </div>
-              <div class="form-group">
-                <label for="employee">الموظف/العامل</label>
-                <select id="employee" required>
-                  <option value="">اختر الموظف/العامل</option>
-                  <option value="employee1">محمد أحمد</option>
-                  <option value="employee2">علي محمود</option>
-                  <option value="employee3">أحمد سعيد</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="type">نوع المعاملة</label>
-                <select id="type" required>
-                  <option value="">اختر نوع المعاملة</option>
-                  <option value="salary">راتب</option>
-                  <option value="advance">سلفة</option>
-                  <option value="bonus">مكافأة</option>
-                  <option value="deduction">خصم</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="amount">المبلغ</label>
-                <input type="number" id="amount" min="0" step="0.01" required />
-              </div>
-              <div class="form-group">
-                <label for="description">الوصف</label>
-                <textarea id="description" rows="3" required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="reference">المرجع</label>
-                <input type="text" id="reference" required />
-              </div>
-              <div class="form-actions">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="clear-fields"
-                >
-                  مسح الحقول
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="add-transaction"
-                >
-                  إضافة المعاملة
-                </button>
-              </div>
-            </form>
+        <div class="profile-content">
+          <!-- Employee Info Section -->
+          <div class="employee-info-section">
+            <h2>معلومات الموظف</h2>
+            <div class="employee-info" id="employee-info">
+              <!-- Employee info will be loaded here -->
+            </div>
           </div>
 
-          <div class="table-section">
-            <div class="table-header">
-              <h2>قائمة المعاملات</h2>
-              <div class="table-actions">
-                <input
-                  type="text"
-                  class="search-input"
-                  id="search-transactions"
-                  placeholder="بحث..."
-                />
-                <button class="btn btn-primary" id="update-transactions">
-                  تحديث
-                </button>
-              </div>
+          <!-- Employee Transactions Section -->
+          <div class="transactions-section">
+            <div class="section-header">
+              <h2>معاملات الموظف</h2>
             </div>
             <div class="table-container">
               <table>
                 <thead>
                   <tr>
                     <th>التاريخ</th>
-                    <th>الموظف/العامل</th>
                     <th>نوع المعاملة</th>
                     <th>المبلغ</th>
                     <th>الوصف</th>
                     <th>المرجع</th>
-                    <th>الإجراءات</th>
                   </tr>
                 </thead>
                 <tbody id="transactions-table-body">
                   <!-- Transactions will be added here dynamically -->
+                </tbody>
+              </table>
+            </div>
+            <div class="total-amount" id="total-amount">
+              <!-- Total amount will be displayed here -->
+            </div>
+          </div>
+
+          <!-- Attendance Section -->
+          <div class="attendance-section">
+            <div class="section-header">
+              <h2>سجل الحضور والانصراف</h2>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>الحالة</th>
+                    <th>وقت الحضور</th>
+                    <th>وقت الانصراف</th>
+                    <th>ملاحظات</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-table-body">
+                  <!-- Attendance records will be added here dynamically -->
                 </tbody>
               </table>
             </div>

@@ -95,15 +95,13 @@ function updateCashOutTable() {
             <td>${record.reference}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editRecord(${
-                      record.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <button class="btn btn-primary" onclick="editRecord(${record.id
+      })">
+                        <span class="icon icon-edit"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteRecord(${
-                      record.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="deleteRecord(${record.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>
@@ -148,11 +146,12 @@ function deleteRecord(id) {
 // Format date to Gregorian format
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString("ar-EG", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  // Format as DD/MM/YYYY
+  return `${day}/${month}/${year}`;
 }
 
 // Format currency
@@ -199,15 +198,13 @@ searchInput.addEventListener("input", function (e) {
             <td>${record.reference}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editRecord(${
-                      record.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <button class="btn btn-primary" onclick="editRecord(${record.id
+      })">
+                        <span class="icon icon-edit"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteRecord(${
-                      record.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="deleteRecord(${record.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>

@@ -132,7 +132,12 @@ function getReportTitle(type) {
 
 // Helper function to format date
 function formatDate(date) {
-  return date.toLocaleDateString("ar-SA");
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  // Format as DD/MM/YYYY
+  return `${day}/${month}/${year}`;
 }
 
 // Handle print button

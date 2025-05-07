@@ -77,15 +77,13 @@ function updateSuppliersTable() {
             <td>${supplier.notes || "-"}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editSupplier(${
-                      supplier.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <button class="btn btn-primary" onclick="editSupplier(${supplier.id
+      })">
+                        <span class="icon icon-edit"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteSupplier(${
-                      supplier.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="deleteSupplier(${supplier.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>
@@ -120,9 +118,9 @@ function deleteSupplier(id) {
 
 // Format currency
 function formatCurrency(amount) {
-  return new Intl.NumberFormat("ar-SA", {
+  return new Intl.NumberFormat("ar-EG", {
     style: "currency",
-    currency: "SAR",
+    currency: "EGP",
   }).format(amount);
 }
 
@@ -147,15 +145,13 @@ searchInput.addEventListener("input", function (e) {
             <td>${supplier.notes || "-"}</td>
             <td>
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editSupplier(${
-                      supplier.id
-                    })">
-                        <i class="fas fa-edit"></i>
+                    <button class="btn btn-primary" onclick="editSupplier(${supplier.id
+      })">
+                        <span class="icon icon-edit"></span>
                     </button>
-                    <button class="btn btn-danger" onclick="deleteSupplier(${
-                      supplier.id
-                    })">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="deleteSupplier(${supplier.id
+      })">
+                        <span class="icon icon-trash"></span>
                     </button>
                 </div>
             </td>

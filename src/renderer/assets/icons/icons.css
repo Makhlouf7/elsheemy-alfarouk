@@ -1,0 +1,72 @@
+/* Local Icons CSS */
+.icon {
+  display: inline-block;
+  width: 2em;
+  height: 1.1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+.icon-eye {
+  background-image: url("./eye.svg");
+}
+
+.icon-edit {
+  background-image: url("./edit.svg");
+}
+
+.icon-trash {
+  background-image: url("./trash.svg");
+}
+
+.icon-users {
+  background-image: url("./users.svg");
+}
+
+.icon-arrow-right {
+  background-image: url("./arrow-right.svg");
+}
+
+.icon-inbox {
+  background-image: url("./inbox.svg");
+}
+
+.icon-paper-plane {
+  background-image: url("./paper-plane.svg");
+}
+
+.icon-truck {
+  background-image: url("./truck.svg");
+}
+
+.icon-calendar-alt {
+  background-image: url("./calendar-alt.svg");
+}
+
+.icon-money-bill-wave {
+  background-image: url("./money-bill-wave.svg");
+}
+
+.icon-money-bill-alt {
+  background-image: url("./money-bill-alt.svg");
+}
+
+.icon-user-tie {
+  background-image: url("./user-tie.svg");
+}
+
+.icon-clock {
+  background-image: url("./clock.svg");
+}
+
+.icon-clipboard-list {
+  background-image: url("./clipboard-list.svg");
+}
+
+.icon-chart-bar {
+  background-image: url("./chart-bar.svg");
+}
+
+/* Add more icons as needed */
