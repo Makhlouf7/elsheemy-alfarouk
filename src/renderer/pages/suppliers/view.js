@@ -20,7 +20,7 @@ const fillData = async () => {
   });
 
   if (!res.success) {
-    alert("حدث خطأ في احضار البيانات");
+    viewMessage("حدث خطأ في احضار البيانات");
     return;
   }
 

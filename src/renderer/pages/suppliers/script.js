@@ -2,7 +2,7 @@
 const supplierForm = document.getElementById("supplier-form");
 const tableBody = document.getElementById("suppliers-table-body");
 const searchNumberForm = document.getElementById("search-number-form");
-
+console.log(viewMessage);
 // Functions =====
 const renderSuppliersTable = (suppliers) => {
   tableBody.innerHTML = "";
@@ -49,11 +49,11 @@ const deleteDoc = async function (id) {
   const res = await window.dbAPI.deleteDocById({ modelName: "Supplier", id });
 
   if (!res.success) {
-    alert("حدث خطأ أثناء المسح");
-    fetchAndRenderSuppliers();
+    viewMessage("حدث خطأ أثناء المسح");
     return;
   }
-  alert("تم المسح بنجاح");
+  viewMessage("تم المسح بنجاح");
+  fetchAndRenderSuppliers();
 };
 
 searchNumberForm.addEventListener("submit", async (e) => {
@@ -66,7 +66,7 @@ searchNumberForm.addEventListener("submit", async (e) => {
   });
 
   if (!res.success) {
-    alert("حدث خطأ اثناء البحث");
+    viewMessage("حدث خطأ اثناء البحث");
     return;
   }
   renderSuppliersTable(res.data);
@@ -81,11 +81,12 @@ supplierForm?.addEventListener("submit", async (e) => {
   });
 
   if (!res.success) {
-    alert("حدث خطأ اثناء الاضافة");
+    viewMessage("حدث خطأ اثناء الاضافة");
     return;
   }
 
-  alert("تم الاضافة بنجاح");
+  viewMessage("تم الاضافة بنجاح");
+
   supplierForm.reset();
   await fetchAndRenderSuppliers();
 });

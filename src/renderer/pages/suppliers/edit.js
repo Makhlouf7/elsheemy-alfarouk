@@ -15,8 +15,8 @@ editSupplierForm.addEventListener("submit", async function (e) {
     data,
   });
   if (!res.success) {
-    alert("حدث خطأ في التحديث");
+    viewMessage("حدث خطأ في التحديث");
     return;
   }
-  alert("تم التحديث بنجاح");
+  viewMessage("تم التحديث بنجاح");
 });
