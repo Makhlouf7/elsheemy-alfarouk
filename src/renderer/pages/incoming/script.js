@@ -161,41 +161,61 @@ document.getElementById("incoming-form").addEventListener("submit", (e) => {
     // Add report info with better formatting
     const info = document.createElement('div');
     info.className = 'print-info';
-    info.style.fontSize = "12px";
-    info.style.margin = "10px 0";
-    info.style.padding = "10px";
-    info.style.border = "1px solid #ccc";
+    info.style.fontSize = "13px";
+    info.style.margin = "15px 0";
+    info.style.padding = "15px";
+    info.style.border = "1px solid #000";
     info.style.backgroundColor = "#f9f9f9";
+    info.style.borderRadius = "5px";
+    info.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+
+    // Get current date and format it
+    const currentDate = new Date();
+    const formattedCurrentDate = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+    // Get the most recent date from the data
+    const lastUpdateDate = incomingData.length > 0 ? formatDate(incomingData[incomingData.length - 1].date) : 'لا يوجد';
+
     info.innerHTML = `
-      <h3 style="font-size: 14px; margin: 0 0 5px 0; border-bottom: 1px solid #ccc; padding-bottom: 3px;">معلومات السجل</h3>
-      <p style="margin: 3px 0;">إجمالي عدد السجلات: <strong>${incomingData.length}</strong></p>
-      <p style="margin: 3px 0;">تاريخ آخر تحديث: <strong>${incomingData.length > 0 ? formatDate(incomingData[incomingData.length - 1].date) : 'لا يوجد'}</strong></p>
+      <h3 style="font-size: 16px; margin: 0 0 10px 0; border-bottom: 2px solid #007bff; padding-bottom: 5px; color: #007bff;">معلومات سجل الوارد</h3>
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div style="min-width: 200px; margin-left: 20px;">
+          <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">إجمالي عدد السجلات:</span> <span style="font-weight: bold; color: #007bff;">${incomingData.length}</span></p>
+          <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">تاريخ آخر تحديث:</span> <span style="font-weight: bold; color: #007bff;">${lastUpdateDate}</span></p>
+        </div>
+        <div style="min-width: 200px;">
+          <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">تاريخ الطباعة:</span> <span style="font-weight: bold; color: #007bff;">${formattedCurrentDate}</span></p>
+          <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">رقم التقرير:</span> <span style="font-weight: bold; color: #007bff;">${Date.now().toString().slice(-8)}</span></p>
+        </div>
+      </div>
     `;
     printContainer.appendChild(info);
 
     // Add report table with better formatting
     const table = document.createElement('table');
     table.className = 'print-table';
-    table.style.border = "1px solid #000";
-    table.style.width = "90%";
-    table.style.margin = "0 auto 15px auto"; // Center the table and reduce bottom margin
+    table.style.border = "2px solid #000";
+    table.style.width = "95%";
+    table.style.margin = "15px auto 20px auto"; // Center the table and adjust margins
     table.style.borderCollapse = "collapse";
-    table.style.fontSize = "12px"; // Smaller font size for the table
+    table.style.fontSize = "13px"; // Slightly larger font size for better readability
+    table.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
 
-    // Add table header with styling
+    // Add table header with improved styling
     const thead = document.createElement('thead');
-    thead.style.backgroundColor = "#f2f2f2";
+    thead.style.backgroundColor = "#007bff";
+    thead.style.color = "white";
     thead.innerHTML = `
       <tr>
-        <th style="width: 10%; padding: 6px; font-size: 13px; border: 1px solid #000;">التاريخ</th>
-        <th style="width: 12%; padding: 6px; font-size: 13px; border: 1px solid #000;">اسم المورد</th>
-        <th style="width: 10%; padding: 6px; font-size: 13px; border: 1px solid #000;">النوع</th>
-        <th style="width: 10%; padding: 6px; font-size: 13px; border: 1px solid #000;">الكمية</th>
-        <th style="width: 8%; padding: 6px; font-size: 13px; border: 1px solid #000;">شكاره</th>
-        <th style="width: 10%; padding: 6px; font-size: 13px; border: 1px solid #000;">رقم السيارة</th>
-        <th style="width: 12%; padding: 6px; font-size: 14px; background-color: #e6e6e6; border: 1px solid #000;">سعر الطن</th>
-        <th style="width: 10%; padding: 6px; font-size: 13px; border: 1px solid #000;">نوع الحمولة</th>
-        <th style="width: 8%; padding: 6px; font-size: 13px; border: 1px solid #000;">الصنف</th>
+        <th style="width: 10%; padding: 8px; font-size: 14px; border: 1px solid #000;">التاريخ</th>
+        <th style="width: 12%; padding: 8px; font-size: 14px; border: 1px solid #000;">اسم المورد</th>
+        <th style="width: 10%; padding: 8px; font-size: 14px; border: 1px solid #000;">النوع</th>
+        <th style="width: 10%; padding: 8px; font-size: 14px; border: 1px solid #000;">الكمية</th>
+        <th style="width: 8%; padding: 8px; font-size: 14px; border: 1px solid #000;">شكاره</th>
+        <th style="width: 10%; padding: 8px; font-size: 14px; border: 1px solid #000;">رقم السيارة</th>
+        <th style="width: 12%; padding: 8px; font-size: 14px; border: 1px solid #000;">سعر الطن</th>
+        <th style="width: 10%; padding: 8px; font-size: 14px; border: 1px solid #000;">نوع الحمولة</th>
+        <th style="width: 8%; padding: 8px; font-size: 14px; border: 1px solid #000;">الصنف</th>
       </tr>
     `;
     table.appendChild(thead);
@@ -208,49 +228,130 @@ document.getElementById("incoming-form").addEventListener("submit", (e) => {
       return new Date(b.date) - new Date(a.date);
     });
 
+    // Initialize totals
+    let totalQuantity = 0;
+    let totalShakara = 0;
+    let totalPriceValue = 0;
+
     // Check if there are items in the data
     if (sortedData.length === 0) {
       // Add an empty row with a message if there are no items
       const emptyRow = document.createElement('tr');
       emptyRow.innerHTML = `
-        <td colspan="9" style="padding: 10px; text-align: center; font-size: 14px; border: 1px solid #000;">لا توجد بيانات في السجل</td>
+        <td colspan="9" style="padding: 15px; text-align: center; font-size: 16px; border: 1px solid #000; background-color: #f9f9f9;">لا توجد بيانات في السجل</td>
       `;
       tbody.appendChild(emptyRow);
     } else {
       // Add rows for each item in the data
-      sortedData.forEach(item => {
+      sortedData.forEach((item, index) => {
         const row = document.createElement('tr');
         row.style.textAlign = "center";
 
+        // Add alternating row colors for better readability
+        if (index % 2 === 0) {
+          row.style.backgroundColor = "#f9f9f9";
+        }
+
+        // Add to totals
+        totalQuantity += parseFloat(item.quantity) || 0;
+        totalShakara += parseInt(item.shakara) || 0;
+        totalPriceValue += parseFloat(item.priceIn) || 0;
+
         row.innerHTML = `
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${formatDate(item.date)}</td>
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${item.supplier || '-'}</td>
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${item.type || '-'}</td>
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${item.quantity.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${item.shakara.toLocaleString('ar-EG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${item.carNumber || '-'}</td>
-          <td style="padding: 4px; text-align: center; font-weight: bold; font-size: 13px; background-color: #f9f9f9; border: 1px solid #000;">${item.priceIn.toLocaleString('ar-EG')} جنيه</td>
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${item.loadType || '-'}</td>
-          <td style="padding: 4px; text-align: center; font-size: 12px; border: 1px solid #000;">${item.category || '-'}</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${formatDate(item.date)}</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${item.supplier || '-'}</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${item.type || '-'}</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${item.quantity.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${item.shakara.toLocaleString('ar-EG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${item.carNumber || '-'}</td>
+          <td style="padding: 6px; text-align: center; font-weight: bold; font-size: 13px; border: 1px solid #000;">${item.priceIn.toLocaleString('ar-EG')} جنيه</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${item.loadType || '-'}</td>
+          <td style="padding: 6px; text-align: center; font-size: 13px; border: 1px solid #000;">${item.category || '-'}</td>
         `;
         tbody.appendChild(row);
       });
+
+      // Add a totals row
+      const totalsRow = document.createElement('tr');
+      totalsRow.style.backgroundColor = "#e6f7ff";
+      totalsRow.style.fontWeight = "bold";
+      totalsRow.innerHTML = `
+        <td colspan="3" style="padding: 8px; text-align: center; font-size: 14px; border: 1px solid #000; background-color: #007bff; color: white;">الإجمالي</td>
+        <td style="padding: 8px; text-align: center; font-size: 14px; border: 1px solid #000;">${totalQuantity.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td style="padding: 8px; text-align: center; font-size: 14px; border: 1px solid #000;">${totalShakara.toLocaleString('ar-EG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
+        <td style="padding: 8px; text-align: center; font-size: 14px; border: 1px solid #000;">-</td>
+        <td style="padding: 8px; text-align: center; font-size: 14px; border: 1px solid #000; background-color: rgba(11, 161, 49, 0.2);">${(totalPriceValue / sortedData.length).toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} جنيه (متوسط)</td>
+        <td colspan="2" style="padding: 8px; text-align: center; font-size: 14px; border: 1px solid #000;">-</td>
+      `;
+      tbody.appendChild(totalsRow);
     }
 
     table.appendChild(tbody);
     printContainer.appendChild(table);
 
+    // Add summary section with charts or additional information
+    if (sortedData.length > 0) {
+      const summary = document.createElement('div');
+      summary.className = 'print-summary';
+      summary.style.margin = "20px auto";
+      summary.style.width = "95%";
+      summary.style.padding = "15px";
+      summary.style.border = "1px solid #000";
+      summary.style.borderRadius = "5px";
+      summary.style.backgroundColor = "#f9f9f9";
+
+      // Calculate average price
+      const avgPrice = totalPriceValue / sortedData.length;
+
+      summary.innerHTML = `
+        <h3 style="font-size: 16px; margin: 0 0 10px 0; border-bottom: 2px solid #007bff; padding-bottom: 5px; color: #007bff;">ملخص البيانات</h3>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+          <div style="min-width: 200px; margin-left: 20px;">
+            <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">إجمالي الكمية:</span> <span style="font-weight: bold; color: #007bff;">${totalQuantity.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></p>
+            <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">إجمالي الشكاير:</span> <span style="font-weight: bold; color: #007bff;">${totalShakara.toLocaleString('ar-EG')}</span></p>
+          </div>
+          <div style="min-width: 200px;">
+            <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">متوسط السعر:</span> <span style="font-weight: bold; color: #007bff;">${avgPrice.toLocaleString('ar-EG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} جنيه</span></p>
+            <p style="margin: 5px 0;"><span style="font-weight: bold; color: #555;">عدد الموردين:</span> <span style="font-weight: bold; color: #007bff;">${new Set(sortedData.map(item => item.supplier)).size}</span></p>
+          </div>
+        </div>
+      `;
+
+      printContainer.appendChild(summary);
+    }
+
     // Add report footer with better formatting
     const footer = document.createElement('div');
     footer.className = 'print-footer';
-    footer.style.marginTop = "15px";
+    footer.style.marginTop = "30px";
     footer.style.textAlign = "center";
-    footer.style.borderTop = "1px solid #ccc";
-    footer.style.paddingTop = "5px";
-    footer.style.fontSize = "10px";
+    footer.style.borderTop = "2px solid #007bff";
+    footer.style.paddingTop = "10px";
+    footer.style.fontSize = "12px";
+    footer.style.position = "relative";
+    footer.style.width = "95%";
+    footer.style.margin = "30px auto 0 auto";
+
+    // Get current date and time for the footer
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('ar-EG');
+
     footer.innerHTML = `
-      <p style="margin: 2px 0;">تم إنشاء هذا التقرير بواسطة نظام إدارة المخزون</p>
-      <p style="margin: 2px 0;">للاستفسار: 01234567890</p>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+        <div style="text-align: right; font-size: 12px;">
+          <p style="margin: 2px 0; color: #555;">تاريخ الطباعة: ${formattedCurrentDate}</p>
+          <p style="margin: 2px 0; color: #555;">وقت الطباعة: ${timeString}</p>
+        </div>
+        <div style="text-align: center; font-size: 12px;">
+          <p style="margin: 2px 0; font-weight: bold; color: #007bff;">مؤسســة الشيــمي و الفــاروق</p>
+          <p style="margin: 2px 0; color: #555;">تقرير سجل الوارد</p>
+        </div>
+        <div style="text-align: left; font-size: 12px;">
+          <p style="margin: 2px 0; color: #555;">صفحة 1 من 1</p>
+          <p style="margin: 2px 0; color: #555;">للاستفسار: 01234567890</p>
+        </div>
+      </div>
+      <p style="margin: 5px 0; font-size: 11px; color: #777; border-top: 1px dashed #ccc; padding-top: 5px;">تم إنشاء هذا التقرير بواسطة نظام إدارة المخزون - جميع الحقوق محفوظة &copy; ${now.getFullYear()}</p>
     `;
     printContainer.appendChild(footer);
 

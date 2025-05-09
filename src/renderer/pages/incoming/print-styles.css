@@ -13,7 +13,7 @@
     padding: 0;
     background-color: white;
     color: black;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     direction: rtl;
   }
 
@@ -34,24 +34,21 @@
     margin-left: 20px;
   }
 
-  .logo-circle {
+  /* Logo oval styles */
+  .logo-oval {
     width: 100%;
     height: 100%;
     border: 3px solid #000;
     border-radius: 50%;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
+    overflow: hidden;
   }
 
-  .logo-text {
-    font-weight: bold;
-    font-size: 14px;
-    text-align: center;
-  }
-
+  /* Company info styles */
   .company-info {
     flex: 1;
   }
@@ -59,6 +56,7 @@
   .company-info h1 {
     font-size: 24px;
     margin: 0 0 5px 0;
+    color: #007bff;
   }
 
   .company-info p {
@@ -68,62 +66,152 @@
 
   .company-info .note {
     font-size: 12px;
-    font-style: italic;
+    font-weight: bold;
+    border: 1px solid #000;
+    padding: 3px;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  .company-info .note + .note {
+    border-top: none;
+    margin-top: 0;
   }
 
   .invoice-details {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #007bff;
     padding-top: 10px;
   }
 
   /* Info styles */
   .print-info {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
+    margin: 15px 0;
+    padding: 15px;
+    border: 1px solid #000;
     background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
   }
 
   .print-info h3 {
-    margin-top: 0;
-    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #007bff;
     padding-bottom: 5px;
+    color: #007bff;
   }
 
   /* Table styles */
   .print-table {
-    width: 100%;
+    width: 95%;
+    border: 2px solid #000;
+    margin: 15px auto 20px auto;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    font-size: 13px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
   .print-table th,
   .print-table td {
     border: 1px solid #000;
-    padding: 8px;
+    padding: 6px;
     text-align: center;
   }
 
   .print-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  /* Summary styles */
+  .print-summary {
+    margin: 20px auto;
+    width: 95%;
+    padding: 15px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  .print-summary h3 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    color: #007bff;
   }
 
   /* Footer styles */
   .print-footer {
-    margin-top: 30px;
+    margin: 30px auto 0 auto;
+    width: 95%;
     text-align: center;
-    border-top: 1px solid #ccc;
+    border-top: 2px solid #007bff;
     padding-top: 10px;
     font-size: 12px;
+    position: relative;
+  }
+
+  .print-footer p {
+    margin: 2px 0;
   }
 
   /* Page break settings */
   @page {
     size: A4;
     margin: 1cm;
+  }
+
+  /* Utility classes */
+  .text-center {
+    text-align: center;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .font-bold {
+    font-weight: bold;
+  }
+
+  .color-primary {
+    color: #007bff;
+  }
+
+  .color-secondary {
+    color: #555;
+  }
+
+  .bg-light {
+    background-color: #f9f9f9;
+  }
+
+  .bg-primary {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .border {
+    border: 1px solid #000;
+  }
+
+  .rounded {
+    border-radius: 5px;
+  }
+
+  .shadow {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 }
