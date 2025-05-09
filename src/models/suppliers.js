@@ -8,5 +8,18 @@ const supplierSchema = new mongoose.Schema({
   notes: String,
 });
 
+supplierSchema.pre(/^find/, function (next) {
+  this.lean();
+  next();
+});
+
+supplierSchema.post("find", function (docs) {
+  docs.forEach((doc) => (doc._id = doc._id.toString()));
+});
+
+supplierSchema.post("findOne", function (doc) {
+  doc._id = doc._id.toString();
+});
+
 const Supplier = mongoose.model("Supplier", supplierSchema);
 module.exports = Supplier;

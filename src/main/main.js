@@ -61,6 +61,16 @@ ipcMain.handle("get:byId", async (event, { modelName, id }) => {
   }
 });
 
+ipcMain.handle("get:byFilter", async (event, { modelName, filterOptions }) => {
+  try {
+    const Model = models[modelName];
+    const doc = await Model.findOne(filterOptions);
+    return { success: true, data: doc };
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 ipcMain.handle("create:doc", async (event, { modelName, data }) => {
   const Model = models[modelName];
   console.log(data);

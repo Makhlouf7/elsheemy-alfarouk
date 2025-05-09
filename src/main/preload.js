@@ -6,4 +6,6 @@ contextBridge.exposeInMainWorld("dbAPI", {
     ipcRenderer.invoke("create:doc", { modelName, data }),
   getDocById: (modelName, id) =>
     ipcRenderer.invoke("get:byId", { modelName, id }),
+  getDocBySearch: (modelName, filterOptions) =>
+    ipcRenderer.invoke("get:byFilter", { modelName, filterOptions }),
 });
