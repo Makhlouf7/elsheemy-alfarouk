@@ -2,10 +2,28 @@ const mongoose = require("mongoose");
 
 const supplierSchema = new mongoose.Schema({
   name: String,
-  phone: String,
+  phone: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   address: String,
   openingBalance: Number,
+  contactPerson: String,
   notes: String,
+});
+
+supplierSchema.pre(/^find/, function (next) {
+  this.lean();
+  next();
+});
+
+supplierSchema.post("find", function (docs) {
+  docs.forEach((doc) => (doc._id = doc._id.toString()));
+});
+
+supplierSchema.post("findOne", function (doc) {
+  doc._id = doc._id.toString();
 });
 
 const Supplier = mongoose.model("Supplier", supplierSchema);

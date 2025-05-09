@@ -12,7 +12,7 @@
 }
 
 .form-section {
-  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -34,15 +34,15 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .page-header .btn {
     width: 100%;
   }
-  
+
   .form-actions {
     flex-direction: column;
   }
-  
+
   .form-actions .btn {
     width: 100%;
   }
