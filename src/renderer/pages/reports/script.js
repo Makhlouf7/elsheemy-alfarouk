@@ -56,6 +56,88 @@ document
     generateReport(reportType, startDate, endDate, format);
   });
 
+// Initialize data variables
+let savedInvoices = [];
+let incomingData = [];
+let cashInData = [];
+let cashOutData = [];
+
+// Function to ensure numeric values are properly parsed for invoices
+function parseInvoiceData(invoices) {
+  return invoices.map(invoice => {
+    // Parse items in each invoice
+    const items = Array.isArray(invoice.items) ? invoice.items.map(item => {
+      return {
+        ...item,
+        quantity: parseFloat(item.quantity) || 0,
+        shakara: parseFloat(item.shakara) || 0,
+        price: parseFloat(item.price) || 0,
+        total: parseFloat(item.total) || 0
+      };
+    }) : [];
+
+    // Parse invoice total
+    return {
+      ...invoice,
+      items,
+      totalAmount: parseFloat(invoice.totalAmount) || 0
+    };
+  });
+}
+
+// Function to ensure numeric values are properly parsed for incoming data
+function parseIncomingData(items) {
+  return items.map(item => {
+    return {
+      ...item,
+      quantity: parseFloat(item.quantity) || 0,
+      shakara: parseFloat(item.shakara) || 0,
+      priceIn: parseFloat(item.priceIn) || 0,
+      priceOut: parseFloat(item.priceOut) || 0
+    };
+  });
+}
+
+// Function to ensure numeric values are properly parsed for cash data
+function parseCashData(items) {
+  return items.map(item => {
+    return {
+      ...item,
+      amount: parseFloat(item.amount) || 0
+    };
+  });
+}
+
+// Load data from localStorage
+try {
+  const storedInvoices = localStorage.getItem('savedInvoices');
+  if (storedInvoices) {
+    savedInvoices = parseInvoiceData(JSON.parse(storedInvoices));
+  }
+
+  const storedIncoming = localStorage.getItem('incomingData');
+  if (storedIncoming) {
+    incomingData = parseIncomingData(JSON.parse(storedIncoming));
+  }
+
+  const storedCashIn = localStorage.getItem('cashInData');
+  if (storedCashIn) {
+    cashInData = parseCashData(JSON.parse(storedCashIn));
+  }
+
+  const storedCashOut = localStorage.getItem('cashOutData');
+  if (storedCashOut) {
+    cashOutData = parseCashData(JSON.parse(storedCashOut));
+  }
+} catch (error) {
+  console.error('Error parsing data from localStorage:', error);
+  // Reset to empty arrays if there's an error
+  savedInvoices = [];
+  incomingData = [];
+  cashInData = [];
+  cashOutData = [];
+}
+
 // Generate report content
 function generateReport(type, startDate, endDate, format) {
   const container = document.getElementById("report-container");
@@ -142,8 +224,19 @@ function formatDate(date) {
 
 // Handle print button
 document.getElementById("print-report").addEventListener("click", function () {
-  window.print();
+  printReport();
 });
+
+function printReport() {
+  const reportContainer = document.getElementById("report-container");
+
+  if (!reportContainer.querySelector(".report-content")) {
+    alert("لا يوجد تقرير للطباعة. الرجاء إنشاء تقرير أولاً.");
+    return;
+  }
+
+  window.print();
+}
 
 // Handle download button
 document
@@ -155,12 +248,64 @@ document
 
 // Sample report generation functions
 function addFinancialReport(container, startDate, endDate) {
+  // Filter data by date range
+  const filteredInvoices = savedInvoices.filter(invoice => {
+    const invoiceDate = new Date(invoice.date);
+    return invoiceDate >= startDate && invoiceDate <= endDate;
+  });
+
+  const filteredIncoming = incomingData.filter(item => {
+    const itemDate = new Date(item.date);
+    return itemDate >= startDate && itemDate <= endDate;
+  });
+
+  const filteredCashIn = cashInData ? cashInData.filter(item => {
+    const itemDate = new Date(item.date);
+    return itemDate >= startDate && itemDate <= endDate;
+  }) : [];
+
+  const filteredCashOut = cashOutData ? cashOutData.filter(item => {
+    const itemDate = new Date(item.date);
+    return itemDate >= startDate && itemDate <= endDate;
+  }) : [];
+
+  // Calculate totals with safety checks
+  const invoicesTotal = filteredInvoices.reduce((sum, invoice) => {
+    const amount = typeof invoice.totalAmount === 'number' ? invoice.totalAmount : 0;
+    return sum + amount;
+  }, 0);
+
+  const incomingTotal = filteredIncoming.reduce((sum, item) => {
+    const priceIn = typeof item.priceIn === 'number' ? item.priceIn : parseFloat(item.priceIn) || 0;
+    const quantity = typeof item.quantity === 'number' ? item.quantity : parseFloat(item.quantity) || 0;
+    return sum + (priceIn * quantity);
+  }, 0);
+
+  const cashInTotal = filteredCashIn.reduce((sum, item) => {
+    const amount = typeof item.amount === 'number' ? item.amount : parseFloat(item.amount) || 0;
+    return sum + amount;
+  }, 0);
+
+  const cashOutTotal = filteredCashOut.reduce((sum, item) => {
+    const amount = typeof item.amount === 'number' ? item.amount : parseFloat(item.amount) || 0;
+    return sum + amount;
+  }, 0);
+
+  const totalAmount = cashInTotal + invoicesTotal;
+  const totalExpenses = cashOutTotal + incomingTotal;
+  const netProfit = totalAmount - totalExpenses;
+
+  // Calculate percentages
+  const getPercentage = (value, total) => {
+    if (total === 0) return '0%';
+    return Math.round((value / total) * 100) + '%';
+  };
+
   // Add financial report content
   const content = document.createElement("div");
   content.innerHTML = `
         <div class="report-chart">
-            <!-- Chart would be added here -->
-            <p>رسم بياني للمعاملات المالية</p>
+            <p>ملخص المعاملات المالية</p>
         </div>
         <table class="report-table">
             <thead>
@@ -172,86 +317,207 @@ function addFinancialReport(container, startDate, endDate) {
             </thead>
             <tbody>
                 <tr>
+                    <td>إجمالي المبيعات</td>
+                    <td>${invoicesTotal.toLocaleString('ar-EG')} جنيه</td>
+                    <td>${getPercentage(invoicesTotal, totalAmount)}</td>
+                </tr>
+                <tr>
                     <td>وارد خزنة</td>
-                    <td>10000</td>
-                    <td>60%</td>
+                    <td>${cashInTotal.toLocaleString('ar-EG')} جنيه</td>
+                    <td>${getPercentage(cashInTotal, totalAmount)}</td>
                 </tr>
                 <tr>
                     <td>منصرف خزنة</td>
-                    <td>5000</td>
-                    <td>30%</td>
+                    <td>${cashOutTotal.toLocaleString('ar-EG')} جنيه</td>
+                    <td>${getPercentage(cashOutTotal, totalExpenses)}</td>
                 </tr>
                 <tr>
-                    <td>خزنة عمال</td>
-                    <td>2000</td>
-                    <td>10%</td>
+                    <td>تكلفة المشتريات</td>
+                    <td>${incomingTotal.toLocaleString('ar-EG')} جنيه</td>
+                    <td>${getPercentage(incomingTotal, totalExpenses)}</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>صافي الربح</th>
+                    <th colspan="2">${netProfit.toLocaleString('ar-EG')} جنيه</th>
+                </tr>
+            </tfoot>
         </table>
     `;
   container.appendChild(content);
 }
 
 function addSalesReport(container, startDate, endDate) {
+  // Filter invoices by date range
+  const filteredInvoices = savedInvoices.filter(invoice => {
+    const invoiceDate = new Date(invoice.date);
+    return invoiceDate >= startDate && invoiceDate <= endDate;
+  });
+
+  // Group items by category
+  const itemsByCategory = {};
+  let totalSales = 0;
+
+  filteredInvoices.forEach(invoice => {
+    if (Array.isArray(invoice.items)) {
+      invoice.items.forEach(item => {
+        const category = item.category || 'غير محدد';
+        if (!itemsByCategory[category]) {
+          itemsByCategory[category] = {
+            quantity: 0,
+            total: 0
+          };
+        }
+
+        // Safely convert values to numbers
+        const quantity = typeof item.quantity === 'number' ? item.quantity : parseFloat(item.quantity) || 0;
+        const total = typeof item.total === 'number' ? item.total : parseFloat(item.total) || 0;
+
+        itemsByCategory[category].quantity += quantity;
+        itemsByCategory[category].total += total;
+        totalSales += total;
+      });
+    }
+  });
+
+  // Create table rows
+  let tableRows = '';
+  Object.keys(itemsByCategory).forEach(category => {
+    const item = itemsByCategory[category];
+    const percentage = totalSales > 0 ? Math.round((item.total / totalSales) * 100) : 0;
+
+    tableRows += `
+      <tr>
+        <td>${category}</td>
+        <td>${item.quantity}</td>
+        <td>${item.total.toLocaleString('ar-EG')} جنيه</td>
+        <td>${percentage}%</td>
+      </tr>
+    `;
+  });
+
+  // If no sales data
+  if (tableRows === '') {
+    tableRows = `
+      <tr>
+        <td colspan="4">لا توجد مبيعات في هذه الفترة</td>
+      </tr>
+    `;
+  }
+
   // Add sales report content
   const content = document.createElement("div");
   content.innerHTML = `
         <div class="report-chart">
-            <!-- Chart would be added here -->
-            <p>رسم بياني للمبيعات</p>
+            <p>ملخص المبيعات</p>
         </div>
         <table class="report-table">
             <thead>
                 <tr>
-                    <th>المنتج</th>
+                    <th>الصنف</th>
                     <th>الكمية</th>
                     <th>المبلغ</th>
+                    <th>النسبة</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>منتج 1</td>
-                    <td>50</td>
-                    <td>5000</td>
-                </tr>
-                <tr>
-                    <td>منتج 2</td>
-                    <td>30</td>
-                    <td>3000</td>
-                </tr>
+                ${tableRows}
             </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">إجمالي المبيعات</th>
+                    <th colspan="2">${totalSales.toLocaleString('ar-EG')} جنيه</th>
+                </tr>
+            </tfoot>
         </table>
     `;
   container.appendChild(content);
 }
 
 function addInventoryReport(container) {
+  // Group incoming items by category and type
+  const inventory = {};
+  let totalValue = 0;
+
+  incomingData.forEach(item => {
+    // Safely get values with defaults
+    const category = item.category || 'غير محدد';
+    const type = item.type || 'غير محدد';
+    const key = `${category}-${type}`;
+
+    // Safely convert values to numbers
+    const priceIn = typeof item.priceIn === 'number' ? item.priceIn : parseFloat(item.priceIn) || 0;
+    const priceOut = typeof item.priceOut === 'number' ? item.priceOut : parseFloat(item.priceOut) || 0;
+    const quantity = typeof item.quantity === 'number' ? item.quantity : parseFloat(item.quantity) || 0;
+
+    if (!inventory[key]) {
+      inventory[key] = {
+        category,
+        type,
+        quantity: 0,
+        priceIn,
+        priceOut,
+        totalValue: 0
+      };
+    }
+
+    inventory[key].quantity += quantity;
+    inventory[key].totalValue += priceIn * quantity;
+    totalValue += priceIn * quantity;
+  });
+
+  // Create table rows
+  let tableRows = '';
+  Object.values(inventory).forEach(item => {
+    const profit = item.priceOut > 0 ? ((item.priceOut - item.priceIn) / item.priceIn * 100).toFixed(1) : 'غير محدد';
+
+    tableRows += `
+      <tr>
+        <td>${item.category}</td>
+        <td>${item.type}</td>
+        <td>${item.quantity}</td>
+        <td>${item.priceIn.toLocaleString('ar-EG')} جنيه</td>
+        <td>${item.priceOut > 0 ? item.priceOut.toLocaleString('ar-EG') + ' جنيه' : 'غير محدد'}</td>
+        <td>${profit !== 'غير محدد' ? profit + '%' : 'غير محدد'}</td>
+        <td>${item.totalValue.toLocaleString('ar-EG')} جنيه</td>
+      </tr>
+    `;
+  });
+
+  // If no inventory data
+  if (tableRows === '') {
+    tableRows = `
+      <tr>
+        <td colspan="7">لا توجد بيانات مخزون</td>
+      </tr>
+    `;
+  }
+
   // Add inventory report content
   const content = document.createElement("div");
   content.innerHTML = `
         <table class="report-table">
             <thead>
                 <tr>
-                    <th>المنتج</th>
+                    <th>الصنف</th>
+                    <th>النوع</th>
                     <th>الكمية المتاحة</th>
                     <th>سعر الشراء</th>
                     <th>سعر البيع</th>
+                    <th>نسبة الربح</th>
+                    <th>القيمة الإجمالية</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>منتج 1</td>
-                    <td>100</td>
-                    <td>50</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>منتج 2</td>
-                    <td>200</td>
-                    <td>30</td>
-                    <td>60</td>
-                </tr>
+                ${tableRows}
             </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="6">إجمالي قيمة المخزون</th>
+                    <th>${totalValue.toLocaleString('ar-EG')} جنيه</th>
+                </tr>
+            </tfoot>
         </table>
     `;
   container.appendChild(content);

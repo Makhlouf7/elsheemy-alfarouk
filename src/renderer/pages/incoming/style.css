@@ -1,88 +1,231 @@
 /* Incoming Page Specific Styles */
 .page-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .form-section {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .form-section h2 {
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
 .form-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 10px;
 }
 
 .table-section {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .table-actions {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .search-input {
-    padding: 8px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    width: 200px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  width: 200px;
 }
 
 /* Responsive Design for Incoming Page */
 @media (max-width: 1024px) {
-    .page-content {
-        grid-template-columns: 1fr;
-    }
+  .page-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Form Input Specific Styles */
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* Table Responsive Styles */
 @media (max-width: 768px) {
-    .table-container {
-        overflow-x: auto;
-    }
-    
-    table {
-        min-width: 800px;
-    }
-} 
+  .table-container {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 800px;
+  }
+}
+
+/* Print styles */
+@media print {
+  @page {
+    size: A4;
+    margin: 1cm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  /* Create a print container */
+  .print-container {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    background: white;
+    font-family: "Arial", sans-serif;
+  }
+
+  /* Add print container dynamically via JavaScript */
+  .print-container,
+  .print-container * {
+    visibility: visible;
+  }
+
+  /* Report header */
+  .print-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000;
+  }
+
+  .print-header h1 {
+    font-size: 24px;
+    margin: 0 0 5px 0;
+    color: #000;
+  }
+
+  .print-header p {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+  }
+
+  /* Report info */
+  .print-info {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .print-info h3 {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    color: #333;
+  }
+
+  .print-info p {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+  }
+
+  /* Report table */
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .print-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .print-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+
+  .print-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* Report footer */
+  .print-footer {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+  }
+
+  /* Hide elements not needed for printing */
+  .sidebar,
+  .form-section,
+  .table-header,
+  .main-header {
+    display: none !important;
+  }
+
+  .page-content {
+    display: block;
+    padding: 0;
+  }
+
+  .table-section {
+    box-shadow: none;
+    padding: 0;
+  }
+
+  /* Fallback for old print style */
+  .table-container,
+  .table-container * {
+    visibility: visible;
+  }
+
+  .table-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: white;
+  }
+}

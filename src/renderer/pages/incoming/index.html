@@ -6,6 +6,7 @@
     <title>صفحة الوارد</title>
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./print-styles.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
   </head>
   <body>
@@ -111,7 +112,7 @@
               </div>
               <div class="form-group">
                 <label for="quantity">الكمية بالطن</label>
-                <input type="number" id="quantity" required />
+                <input type="number" id="quantity" step="any" min="0.01" required />
               </div>
               <div class="form-group">
                 <label for="shakara">شكاره</label>
@@ -123,11 +124,11 @@
               </div>
               <div class="form-group">
                 <label for="price-in">سعر الطن الوارد</label>
-                <input type="number" id="price-in" required />
+                <input type="number" id="price-in" step="any" min="0.01" required />
               </div>
               <div class="form-group">
                 <label for="price-out">سعر الطن البيع</label>
-                <input type="number" id="price-out" required />
+                <input type="number" id="price-out" step="any" min="0" required />
               </div>
               <div class="form-group">
                 <label for="load-type">نوع الحمولة</label>
@@ -171,16 +172,17 @@
             <div class="table-container">
               <table>
                 <thead>
-                  <tr>
-                    <th>التاريخ</th>
-                    <th>اسم المورد</th>
-                    <th>النوع</th>
-                    <th>الكمية</th>
-                    <th>شكاره</th>
-                    <th>رقم السيارة</th>
-                    <th>سعر الطن</th>
-                    <th>نوع الحمولة</th>
-                    <th>الصنف</th>
+                  <tr style="background-color: #f2f2f2;">
+                    <th style="padding: 10px; font-size: 16px;">التاريخ</th>
+                    <th style="padding: 10px; font-size: 16px;">اسم المورد</th>
+                    <th style="padding: 10px; font-size: 16px;">النوع</th>
+                    <th style="padding: 10px; font-size: 16px;">الكمية</th>
+                    <th style="padding: 10px; font-size: 16px;">شكاره</th>
+                    <th style="padding: 10px; font-size: 16px;">رقم السيارة</th>
+                    <th style="padding: 10px; font-size: 18px; background-color: #e6e6e6; border: 2px solid #000;">سعر الطن</th>
+                    <th style="padding: 10px; font-size: 16px;">نوع الحمولة</th>
+                    <th style="padding: 10px; font-size: 16px;">الصنف</th>
+                    <th style="padding: 10px; font-size: 16px;">إجراءات</th>
                   </tr>
                 </thead>
                 <tbody id="incoming-table-body">

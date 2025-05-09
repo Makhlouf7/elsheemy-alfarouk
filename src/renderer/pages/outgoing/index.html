@@ -6,6 +6,7 @@
     <title>صفحة الصادر</title>
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./print-styles.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
   </head>
   <body>
@@ -134,7 +135,7 @@
               </div>
               <div class="form-group">
                 <label for="quantity">الكمية</label>
-                <input type="number" id="quantity" required />
+                <input type="number" id="quantity" step="any" min="0.01" required />
               </div>
               <div class="form-group">
                 <label for="shakara">شكاره</label>
@@ -142,7 +143,7 @@
               </div>
               <div class="form-group">
                 <label for="price">السعر</label>
-                <input type="number" id="price" required />
+                <input type="number" id="price" step="any" min="0.01" required />
               </div>
               <div class="form-actions">
                 <button
@@ -163,8 +164,9 @@
               <h2>منتجات الفاتورة</h2>
               <div class="table-actions">
                 <button class="btn btn-primary" id="save-invoice">حفظ</button>
+                <button class="btn btn-primary" id="print-invoice">طباعة</button>
                 <label class="checkbox-label">
-                  <input type="checkbox" id="print" /> طباعة
+                  <input type="checkbox" id="print" /> طباعة عند الحفظ
                 </label>
                 <button class="btn btn-primary">تصدير Excel</button>
               </div>
@@ -172,14 +174,14 @@
             <div class="table-container">
               <table>
                 <thead>
-                  <tr>
-                    <th>نوع الحمولة</th>
-                    <th>الصنف</th>
-                    <th>الكمية</th>
-                    <th>شكاره</th>
-                    <th>السعر</th>
-                    <th>الإجمالي</th>
-                    <th>إجراءات</th>
+                  <tr style="background-color: #f2f2f2;">
+                    <th style="padding: 10px; font-size: 16px;">نوع الحمولة</th>
+                    <th style="padding: 10px; font-size: 16px;">الصنف</th>
+                    <th style="padding: 10px; font-size: 16px;">الكمية</th>
+                    <th style="padding: 10px; font-size: 16px;">شكاره</th>
+                    <th style="padding: 10px; font-size: 16px;">السعر</th>
+                    <th style="padding: 10px; font-size: 18px; background-color: #2bb0117b; border: 2px solid #000;">الإجمالي</th>
+                    <th style="padding: 10px; font-size: 16px;">إجراءات</th>
                   </tr>
                 </thead>
                 <tbody id="invoice-table-body">
@@ -187,8 +189,28 @@
                 </tbody>
               </table>
             </div>
-            <div class="invoice-total">
-              <h3>إجمالي الفاتورة: <span id="total-amount">0</span> جنيه</h3>
+            <div class="invoice-total" style="margin: 20px 0; padding: 15px; border: 2px solid #000; background-color: #f9f9f9;">
+              <h3 style="font-size: 20px; margin: 0;">إجمالي الفاتورة: <span id="total-amount" style="font-weight: bold; font-size: 22px; background-color: #fff; padding: 5px 15px; border: 2px solid #000; border-radius: 5px; display: inline-block; min-width: 150px; text-align: center;">0</span></h3>
+            </div>
+
+            <div class="saved-invoices-section">
+              <h2>الفواتير المحفوظة</h2>
+              <div class="saved-invoices-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>رقم الفاتورة</th>
+                      <th>اسم العميل</th>
+                      <th>التاريخ</th>
+                      <th>المبلغ الإجمالي</th>
+                      <th>إجراءات</th>
+                    </tr>
+                  </thead>
+                  <tbody id="saved-invoices-table-body">
+                    <!-- Saved invoices will be populated here -->
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
