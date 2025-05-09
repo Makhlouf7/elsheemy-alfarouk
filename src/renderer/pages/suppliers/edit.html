@@ -101,35 +101,27 @@
               <input type="hidden" id="supplier-id" />
               <div class="form-group">
                 <label for="supplier-name">اسم المورد</label>
-                <input type="text" id="supplier-name" required />
+                <input type="text" name="name" id="supplier-name" />
               </div>
               <div class="form-group">
                 <label for="phone">رقم الهاتف</label>
-                <input type="text" id="phone" required />
+                <input type="text" name="phone" id="phone" />
               </div>
               <div class="form-group">
                 <label for="address">العنوان</label>
-                <input type="text" id="address" required />
+                <input type="text" name="address" id="address" />
               </div>
               <div class="form-group">
                 <label for="balance">الرصيد</label>
-                <input type="number" id="balance" step="0.01" required />
-              </div>
-              <div class="form-group">
-                <label for="type">نوع المورد</label>
-                <input type="text" id="type" />
+                <input type="number" name="openingBalance" id="balance" />
               </div>
               <div class="form-group">
                 <label for="contact-person">الشخص المسؤول</label>
-                <input type="text" id="contact-person" />
-              </div>
-              <div class="form-group">
-                <label for="email">البريد الإلكتروني</label>
-                <input type="email" id="email" />
+                <input type="text" name="contactPerson" id="contact-person" />
               </div>
               <div class="form-group">
                 <label for="notes">ملاحظات</label>
-                <textarea id="notes" rows="3"></textarea>
+                <textarea id="notes" name="notes" rows="3"></textarea>
               </div>
               <div class="form-actions">
                 <button
@@ -140,7 +132,7 @@
                   مسح الحقول
                 </button>
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-primary"
                   id="save-supplier"
                 >
@@ -154,6 +146,7 @@
     </div>
 
     <script src="../../sidebar.js"></script>
+    <script src="./shared.js"></script>
     <script src="./edit.js"></script>
   </body>
 </html>

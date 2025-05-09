@@ -166,7 +166,16 @@
               </div>
               <div class="form-group">
                 <label for="phone">رقم الهاتف</label>
-                <input type="tel" id="phone" name="phone" required />
+                <input
+                  type="tel"
+                  pattern="^[0-9]{11}"
+                  title="رقم الهاتف يجب أن يحتوي على أرقام فقط ويكون 11 رقمًا"
+                  minlength="11"
+                  maxlength="11"
+                  id="phone"
+                  name="phone"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="address">العنوان</label>
@@ -182,6 +191,10 @@
                 />
               </div>
               <div class="form-group">
+                <label for="contact-person">الشخص المسؤول</label>
+                <input type="text" name="contactPerson" id="contact-person" />
+              </div>
+              <div class="form-group">
                 <label for="notes">ملاحظات</label>
                 <textarea id="notes" rows="3" name="notes" required></textarea>
               </div>
@@ -193,7 +206,7 @@
                 >
                   مسح الحقول
                 </button>
-                <button type="submit" class="btn btn-primary" id="add-supplier">
+                <button type="submit" class="btn btn-primary">
                   إضافة المورد
                 </button>
               </div>
@@ -204,15 +217,27 @@
             <div class="table-header">
               <h2>قائمة الموردين</h2>
               <div class="table-actions">
-                <input
-                  type="text"
-                  class="search-input"
-                  id="search-supplier"
-                  placeholder="بحث..."
-                />
-                <button class="btn btn-primary" id="update-suppliers">
-                  تحديث
-                </button>
+                <form id="search-number-form">
+                  <input
+                    type="text"
+                    name="phone"
+                    class="search-input"
+                    id="search-supplier"
+                    minlength="11"
+                    maxlength="11"
+                    pattern="^[0-9]{11}"
+                    title="رقم الهاتف يجب أن يحتوي على أرقام فقط ويكون 11 رقمًا"
+                    placeholder="بحث برقم الهاتف..."
+                    required
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="update-suppliers"
+                  >
+                    بحث
+                  </button>
+                </form>
               </div>
             </div>
             <div class="table-container">
@@ -221,9 +246,8 @@
                   <tr>
                     <th>اسم المورد</th>
                     <th>رقم الهاتف</th>
-                    <th>العنوان</th>
                     <th>الرصيد</th>
-                    <th>ملاحظات</th>
+                    <th>الشخص المسئول</th>
                     <th>الإجراءات</th>
                   </tr>
                 </thead>
@@ -237,7 +261,7 @@
       </main>
     </div>
 
-    <script src="../../sidebar.js"></script>
+    <!-- <script src="../../sidebar.js"></script> -->
     <script src="./shared.js"></script>
     <script src="./script.js"></script>
   </body>

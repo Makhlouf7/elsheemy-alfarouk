@@ -48,6 +48,7 @@ ipcMain.handle("get:all", async (event, modelName) => {
     return data;
   } catch (err) {
     console.error(`DB error on ${modelName}:`, err);
+    return { success: false };
   }
 });
 
@@ -58,16 +59,18 @@ ipcMain.handle("get:byId", async (event, { modelName, id }) => {
     return { success: true, data: doc };
   } catch (error) {
     console.error(error);
+    return { success: false };
   }
 });
 
 ipcMain.handle("get:byFilter", async (event, { modelName, filterOptions }) => {
   try {
     const Model = models[modelName];
-    const doc = await Model.findOne(filterOptions);
-    return { success: true, data: doc };
+    const docs = await Model.find(filterOptions);
+    return { success: true, data: docs };
   } catch (error) {
-    console.log(error);
+    console.error(`DB error filtering ${modelName}`, err);
+    return { success: false };
   }
 });
 
@@ -79,5 +82,28 @@ ipcMain.handle("create:doc", async (event, { modelName, data }) => {
     return { success: true };
   } catch (err) {
     console.error(`DB error creating ${modelName}:`, err);
+    return { success: false };
+  }
+});
+
+ipcMain.handle("update:doc", async (event, { modelName, id, data }) => {
+  const Model = models[modelName];
+  try {
+    await Model.findByIdAndUpdate(id, data);
+    return { success: true };
+  } catch (err) {
+    console.error(`DB error updating ${modelName}:`, err);
+    return { success: false };
+  }
+});
+
+ipcMain.handle("delete:byId", async (event, { modelName, id }) => {
+  const Model = models[modelName];
+  try {
+    await Model.findByIdAndDelete(id);
+    return { success: true };
+  } catch (err) {
+    console.error(`DB error delete ${modelName}:`, err);
+    return { success: false };
   }
 });

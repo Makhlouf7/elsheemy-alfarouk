@@ -2,9 +2,14 @@ const mongoose = require("mongoose");
 
 const supplierSchema = new mongoose.Schema({
   name: String,
-  phone: String,
+  phone: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   address: String,
   openingBalance: Number,
+  contactPerson: String,
   notes: String,
 });
 

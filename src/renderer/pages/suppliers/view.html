@@ -105,55 +105,36 @@
           <!-- Supplier Info Section -->
           <div class="supplier-info-section">
             <h2>معلومات المورد</h2>
-            <div class="supplier-info" id="supplier-info"></div>
-          </div>
+            <div class="supplier-info" id="supplier-info">
+              <div class="supplier-info-item">
+                <h3 class="supplier-name">اسم المورد</h3>
+                <p id="supplier-name-display">---</p>
+              </div>
 
-          <!-- Supplier Transactions Section -->
-          <div class="transactions-section">
-            <div class="section-header">
-              <h2>معاملات المورد</h2>
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>التاريخ</th>
-                    <th>نوع المعاملة</th>
-                    <th>المبلغ</th>
-                    <th>الوصف</th>
-                    <th>المرجع</th>
-                  </tr>
-                </thead>
-                <tbody id="transactions-table-body">
-                  <!-- Transactions will be added here dynamically -->
-                </tbody>
-              </table>
-            </div>
-            <div class="total-amount" id="total-amount">
-              <!-- Total amount will be displayed here -->
-            </div>
-          </div>
+              <div class="supplier-info-item">
+                <h3 class="supplier-name">الشخص المسئول</h3>
+                <p id="supplier-contact-person-display">---</p>
+              </div>
 
-          <!-- Supplier Products Section -->
-          <div class="products-section">
-            <div class="section-header">
-              <h2>المنتجات الموردة</h2>
-            </div>
-            <div class="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>اسم المنتج</th>
-                    <th>الكمية</th>
-                    <th>السعر</th>
-                    <th>تاريخ التوريد</th>
-                    <th>ملاحظات</th>
-                  </tr>
-                </thead>
-                <tbody id="products-table-body">
-                  <!-- Products will be added here dynamically -->
-                </tbody>
-              </table>
+              <div class="supplier-info-item">
+                <h3>رقم الهاتف</h3>
+                <p id="supplier-phone-display">---</p>
+              </div>
+
+              <div class="supplier-info-item">
+                <h3>العنوان</h3>
+                <p id="supplier-address-display">---</p>
+              </div>
+
+              <div class="supplier-info-item">
+                <h3>الرصيد الافتتاحي</h3>
+                <p id="supplier-balance-display">0.00</p>
+              </div>
+
+              <div class="supplier-info-item" style="grid-column: span 2">
+                <h3>ملاحظات</h3>
+                <p id="supplier-notes-display">---</p>
+              </div>
             </div>
           </div>
         </div>
