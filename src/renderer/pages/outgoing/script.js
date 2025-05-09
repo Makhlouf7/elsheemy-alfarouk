@@ -247,7 +247,8 @@ function printInvoice() {
 
 // Handle print button click
 document.getElementById("print-invoice").addEventListener("click", function () {
-  printInvoice();
+  // Open customer invoice new page with auto print parameter
+  window.open('./customer-invoice-new.html?autoPrint=true', '_blank');
 });
 
 // Handle form submission
@@ -482,9 +483,10 @@ document.getElementById("save-invoice").addEventListener("click", function () {
   // Show success message
   alert(`تم حفظ الفاتورة بنجاح للعميل: ${invoiceData.customerName}`);
 
-  // If print is checked, trigger print
+  // If print is checked, open print preview in a new tab
   if (document.getElementById("print").checked) {
-    printInvoice();
+    // Open print preview with auto print parameter
+    window.open('./print-preview.html?autoPrint=true', '_blank');
   }
 
   // Reset forms and clear items

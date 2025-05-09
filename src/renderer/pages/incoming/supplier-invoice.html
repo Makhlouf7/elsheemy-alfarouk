@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>فاتورة مورد</title>
+    <link rel="stylesheet" href="./print-styles.css" />
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: white;
+        color: black;
+        direction: rtl;
+      }
+
+      .print-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+      }
+
+      .invoice-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 20px 0;
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+      }
+
+      .invoice-number {
+        text-align: left;
+        font-size: 14px;
+        margin: 10px 0;
+      }
+
+      .supplier-details {
+        border: 1px solid #000;
+        padding: 15px;
+        margin: 20px 0;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+      }
+
+      .supplier-details h3 {
+        margin-top: 0;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+        color: #007bff;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .detail-item {
+        margin: 5px 0;
+      }
+
+      .detail-label {
+        font-weight: bold;
+        color: #555;
+      }
+
+      .detail-value {
+        font-weight: bold;
+        color: #007bff;
+      }
+
+      .invoice-table {
+        width: 100%;
+        border: 2px solid #000;
+        margin: 20px 0;
+        border-collapse: collapse;
+      }
+
+      .invoice-table th {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #000;
+      }
+
+      .invoice-table td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #000;
+      }
+
+      .invoice-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .invoice-total {
+        text-align: left;
+        margin: 20px 0;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .total-box {
+        border: 2px solid #000;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #f9f9f9;
+      }
+
+
+
+      .print-actions {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .print-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .print-btn:hover {
+        background-color: #0056b3;
+      }
+
+      @media print {
+        .print-actions {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-container">
+      <!-- Print Actions (only visible on screen) -->
+      <div class="print-actions">
+        <button class="print-btn" onclick="window.print()">طباعة الفاتورة</button>
+      </div>
+
+      <!-- Header with company logo and info -->
+      <div class="print-header">
+        <div class="company-logo-container">
+          <div class="company-logo">
+            <div class="logo-oval">
+              <!-- Oval background with text -->
+              <div style="position: absolute; width: 90%; height: 60%; top: 20%; left: 5%; border: 2px solid #000; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: rotate(-10deg);">
+                <span style="font-weight: bold; font-size: 14px; text-align: center; transform: rotate(10deg);">ELSHEEMY</span>
+                <span style="font-weight: bold; font-size: 14px; text-align: center; transform: rotate(10deg);">STEEL</span>
+              </div>
+              <!-- Top star -->
+              <div style="position: absolute; top: 5%; left: 50%; transform: translateX(-50%);">★</div>
+              <!-- Bottom text -->
+              <div style="position: absolute; bottom: 10%; width: 100%; text-align: center;">
+                <span style="font-weight: bold; font-size: 12px;">ALFAROUK</span>
+              </div>
+              <!-- Left star -->
+              <div style="position: absolute; top: 50%; left: 5%; transform: translateY(-50%);">★</div>
+              <!-- Right star -->
+              <div style="position: absolute; top: 50%; right: 5%; transform: translateY(-50%);">★</div>
+            </div>
+          </div>
+          <div class="company-info">
+            <h1>مؤسســة الشيــمي و الفــاروق</h1>
+            <p>لتجــارة وتوزيــع جميــع مــواد البنــاء</p>
+            <p>يسري عرب عبدالرحمن الشيمي وشركاه</p>
+            <p>س.ت: ٦٨٠٠٤ - ب.ض: ٧٨٤-٣٣٣٣-٦٦٢ - م.ض: ٠١-٠٢-٠٠٥-٥٨٢٢-٠</p>
+            <p class="note">( الكمية المحجوزة لا ترد ولا تلغى في حالة زيادة أو نقص السعر لأي سبب من الأسباب</p>
+            <p class="note">لأن الكمية محجوزة من رغبة العميل )</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice Title -->
+      <div class="invoice-title">فاتورة مورد</div>
+
+      <!-- Invoice Number -->
+      <div class="invoice-number">رقم الفاتورة: INV-2023-001</div>
+
+      <!-- Supplier Details -->
+      <div class="supplier-details">
+        <h3>بيانات المورد</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="detail-label">اسم المورد:</span>
+            <span class="detail-value">مورد الحديد المصري</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">التاريخ:</span>
+            <span class="detail-value">15/10/2023</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">رقم السيارة:</span>
+            <span class="detail-value">ق ص د 123</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">نوع الحمولة:</span>
+            <span class="detail-value">عز</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice Table -->
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>النوع</th>
+            <th>الصنف</th>
+            <th>الكمية</th>
+            <th>شكاره</th>
+            <th>سعر الطن</th>
+            <th>الإجمالي</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>حديد تسليح</td>
+            <td>16</td>
+            <td>25.50</td>
+            <td>510</td>
+            <td>18,500 جنيه</td>
+            <td>471,750 جنيه</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Invoice Total -->
+      <div class="invoice-total">
+        <div class="total-box">
+          الإجمالي: 471,750 جنيه
+        </div>
+      </div>
+
+      <!-- Space between total and footer -->
+      <div style="margin: 50px 0;"></div>
+
+      <!-- Footer -->
+      <div class="print-footer">
+        <p>تم إنشاء هذا التقرير بواسطة نظام إدارة المخزون - جميع الحقوق محفوظة &copy; 2023</p>
+        <p>للاستفسار: 01234567890</p>
+      </div>
+    </div>
+
+    <script>
+      // Simple script to handle print button
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.print-btn').addEventListener('click', function() {
+          window.print();
+        });
+      });
+    </script>
+  </body>
+</html>

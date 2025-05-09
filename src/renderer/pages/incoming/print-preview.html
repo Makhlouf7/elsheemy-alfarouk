@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>طباعة سجل الوارد</title>
+    <link rel="stylesheet" href="./print-styles.css" />
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: white;
+        color: black;
+        direction: rtl;
+      }
+      
+      .print-container {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        background-color: white;
+      }
+      
+      .print-header {
+        margin-bottom: 20px;
+      }
+      
+      .company-logo-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      
+      .company-logo {
+        width: 120px;
+        height: 120px;
+        margin-left: 20px;
+      }
+      
+      .logo-oval {
+        width: 100%;
+        height: 100%;
+        border: 3px solid #000;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      
+      .company-info {
+        flex: 1;
+      }
+      
+      .company-info h1 {
+        font-size: 24px;
+        margin: 0 0 5px 0;
+        color: #007bff;
+      }
+      
+      .company-info p {
+        margin: 3px 0;
+        font-size: 14px;
+      }
+      
+      .company-info .note {
+        font-size: 12px;
+        font-weight: bold;
+        border: 1px solid #000;
+        padding: 3px;
+        background-color: #f9f9f9;
+        text-align: center;
+        margin: 5px 0;
+      }
+      
+      .company-info .note + .note {
+        border-top: none;
+        margin-top: 0;
+      }
+      
+      .invoice-details {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        border-top: 1px solid #007bff;
+        padding-top: 10px;
+      }
+      
+      .print-info {
+        margin: 15px 0;
+        padding: 15px;
+        border: 1px solid #000;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        font-size: 13px;
+      }
+      
+      .print-info h3 {
+        font-size: 16px;
+        margin: 0 0 10px 0;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+        color: #007bff;
+      }
+      
+      .print-table {
+        width: 100%;
+        border: 2px solid #000;
+        margin: 15px 0 20px 0;
+        border-collapse: collapse;
+        font-size: 13px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .print-table th,
+      .print-table td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: center;
+      }
+      
+      .print-table th {
+        background-color: #007bff;
+        color: white;
+        font-size: 14px;
+      }
+      
+      .print-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      
+      .print-summary {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      
+      .print-summary h3 {
+        font-size: 16px;
+        margin: 0 0 10px 0;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+        color: #007bff;
+      }
+      
+      .print-footer {
+        margin: 30px 0 0 0;
+        text-align: center;
+        border-top: 2px solid #007bff;
+        padding-top: 10px;
+        font-size: 12px;
+      }
+      
+      .print-actions {
+        margin: 20px 0;
+        text-align: center;
+      }
+      
+      .print-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      .print-btn:hover {
+        background-color: #0056b3;
+      }
+      
+      @media print {
+        .print-actions {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-container">
+      <!-- Print Actions (only visible on screen) -->
+      <div class="print-actions">
+        <button class="print-btn" onclick="window.print()">طباعة التقرير</button>
+      </div>
+      
+      <!-- Header with company logo and info -->
+      <div class="print-header">
+        <div class="company-logo-container">
+          <div class="company-logo">
+            <div class="logo-oval">
+              <!-- Oval background with text -->
+              <div style="position: absolute; width: 90%; height: 60%; top: 20%; left: 5%; border: 2px solid #000; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: rotate(-10deg);">
+                <span style="font-weight: bold; font-size: 14px; text-align: center; transform: rotate(10deg);">ELSHEEMY</span>
+                <span style="font-weight: bold; font-size: 14px; text-align: center; transform: rotate(10deg);">STEEL</span>
+              </div>
+              <!-- Top star -->
+              <div style="position: absolute; top: 5%; left: 50%; transform: translateX(-50%);">★</div>
+              <!-- Bottom text -->
+              <div style="position: absolute; bottom: 10%; width: 100%; text-align: center;">
+                <span style="font-weight: bold; font-size: 12px;">ALFAROUK</span>
+              </div>
+              <!-- Left star -->
+              <div style="position: absolute; top: 50%; left: 5%; transform: translateY(-50%);">★</div>
+              <!-- Right star -->
+              <div style="position: absolute; top: 50%; right: 5%; transform: translateY(-50%);">★</div>
+            </div>
+          </div>
+          <div class="company-info">
+            <h1>مؤسســة الشيــمي و الفــاروق</h1>
+            <p>لتجــارة وتوزيــع جميــع مــواد البنــاء</p>
+            <p>يسري عرب عبدالرحمن الشيمي وشركاه</p>
+            <p>س.ت: ٦٨٠٠٤ - ب.ض: ٧٨٤-٣٣٣٣-٦٦٢ - م.ض: ٠١-٠٢-٠٠٥-٥٨٢٢-٠</p>
+            <p class="note">( الكمية المحجوزة لا ترد ولا تلغى في حالة زيادة أو نقص السعر لأي سبب من الأسباب</p>
+            <p class="note">لأن الكمية محجوزة من رغبة العميل )</p>
+          </div>
+        </div>
+        <div class="invoice-details">
+          <p>سجل الوارد</p>
+          <p>تاريخ الطباعة: 20/10/2023</p>
+        </div>
+      </div>
+      
+      <!-- Report Info -->
+      <div class="print-info">
+        <h3>معلومات سجل الوارد</h3>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+          <div style="min-width: 200px; margin-left: 20px;">
+            <p><span style="font-weight: bold; color: #555;">إجمالي عدد السجلات:</span> <span style="font-weight: bold; color: #007bff;">5</span></p>
+            <p><span style="font-weight: bold; color: #555;">تاريخ آخر تحديث:</span> <span style="font-weight: bold; color: #007bff;">15/10/2023</span></p>
+          </div>
+          <div style="min-width: 200px;">
+            <p><span style="font-weight: bold; color: #555;">تاريخ الطباعة:</span> <span style="font-weight: bold; color: #007bff;">20/10/2023</span></p>
+            <p><span style="font-weight: bold; color: #555;">رقم التقرير:</span> <span style="font-weight: bold; color: #007bff;">23456789</span></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Report Table -->
+      <table class="print-table">
+        <thead>
+          <tr>
+            <th>التاريخ</th>
+            <th>اسم المورد</th>
+            <th>النوع</th>
+            <th>الكمية</th>
+            <th>شكاره</th>
+            <th>رقم السيارة</th>
+            <th>سعر الطن</th>
+            <th>نوع الحمولة</th>
+            <th>الصنف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>15/10/2023</td>
+            <td>مورد الحديد المصري</td>
+            <td>حديد تسليح</td>
+            <td>25.50</td>
+            <td>510</td>
+            <td>ق ص د 123</td>
+            <td style="font-weight: bold;">18,500 جنيه</td>
+            <td>عز</td>
+            <td>16</td>
+          </tr>
+          <tr>
+            <td>12/10/2023</td>
+            <td>شركة الأهرام للحديد</td>
+            <td>حديد تسليح</td>
+            <td>30.75</td>
+            <td>615</td>
+            <td>س ي ن 456</td>
+            <td style="font-weight: bold;">18,200 جنيه</td>
+            <td>عز</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>10/10/2023</td>
+            <td>مورد الحديد المصري</td>
+            <td>حديد تسليح</td>
+            <td>15.25</td>
+            <td>305</td>
+            <td>ع ر ب 789</td>
+            <td style="font-weight: bold;">18,300 جنيه</td>
+            <td>استثماري</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>05/10/2023</td>
+            <td>شركة الصلب العالمية</td>
+            <td>حديد تسليح</td>
+            <td>40.00</td>
+            <td>800</td>
+            <td>ط ك م 321</td>
+            <td style="font-weight: bold;">18,400 جنيه</td>
+            <td>كومي</td>
+            <td>16</td>
+          </tr>
+          <tr>
+            <td>01/10/2023</td>
+            <td>مصنع الدلتا للحديد</td>
+            <td>حديد تسليح</td>
+            <td>22.50</td>
+            <td>450</td>
+            <td>ل و ي 654</td>
+            <td style="font-weight: bold;">18,100 جنيه</td>
+            <td>عز</td>
+            <td>12</td>
+          </tr>
+          <tr style="background-color: #e6f7ff; font-weight: bold;">
+            <td colspan="3" style="background-color: #007bff; color: white;">الإجمالي</td>
+            <td>134.00</td>
+            <td>2,680</td>
+            <td>-</td>
+            <td style="background-color: rgba(11, 161, 49, 0.2);">18,300 جنيه (متوسط)</td>
+            <td colspan="2">-</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Summary Section -->
+      <div class="print-summary">
+        <h3>ملخص البيانات</h3>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+          <div style="min-width: 200px; margin-left: 20px;">
+            <p><span style="font-weight: bold; color: #555;">إجمالي الكمية:</span> <span style="font-weight: bold; color: #007bff;">134.00</span></p>
+            <p><span style="font-weight: bold; color: #555;">إجمالي الشكاير:</span> <span style="font-weight: bold; color: #007bff;">2,680</span></p>
+          </div>
+          <div style="min-width: 200px;">
+            <p><span style="font-weight: bold; color: #555;">متوسط السعر:</span> <span style="font-weight: bold; color: #007bff;">18,300 جنيه</span></p>
+            <p><span style="font-weight: bold; color: #555;">عدد الموردين:</span> <span style="font-weight: bold; color: #007bff;">3</span></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="print-footer">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+          <div style="text-align: right; font-size: 12px;">
+            <p style="margin: 2px 0; color: #555;">تاريخ الطباعة: 20/10/2023</p>
+            <p style="margin: 2px 0; color: #555;">وقت الطباعة: 10:30:45</p>
+          </div>
+          <div style="text-align: center; font-size: 12px;">
+            <p style="margin: 2px 0; font-weight: bold; color: #007bff;">مؤسســة الشيــمي و الفــاروق</p>
+            <p style="margin: 2px 0; color: #555;">تقرير سجل الوارد</p>
+          </div>
+          <div style="text-align: left; font-size: 12px;">
+            <p style="margin: 2px 0; color: #555;">صفحة 1 من 1</p>
+            <p style="margin: 2px 0; color: #555;">للاستفسار: 01234567890</p>
+          </div>
+        </div>
+        <p style="margin: 5px 0; font-size: 11px; color: #777; border-top: 1px dashed #ccc; padding-top: 5px;">تم إنشاء هذا التقرير بواسطة نظام إدارة المخزون - جميع الحقوق محفوظة &copy; 2023</p>
+      </div>
+    </div>
+    
+    <script>
+      // Simple script to handle print button
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.print-btn').addEventListener('click', function() {
+          window.print();
+        });
+      });
+    </script>
+  </body>
+</html>
