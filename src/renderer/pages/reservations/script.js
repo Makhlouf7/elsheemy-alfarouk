@@ -268,6 +268,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
             window.location.href = `../${page}/${page}.html`;
         }
     });
+    
 });
 
 // Initialize the page

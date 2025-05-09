@@ -1,0 +1,124 @@
+/* Customer Profile Page Specific Styles */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.customer-info-section,
+.transactions-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.customer-info-section h2,
+.transactions-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.customer-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.info-item {
+  margin-bottom: 15px;
+}
+
+.info-label {
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.info-value {
+  font-size: 16px;
+  color: #333;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: right;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.total-amount {
+  text-align: left;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.total-amount-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.total-label {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.total-value {
+  font-size: 18px;
+  color: var(--primary-color);
+}
+
+.positive-amount {
+  color: green;
+}
+
+.negative-amount {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .customer-info {
+    grid-template-columns: 1fr;
+  }
+}
