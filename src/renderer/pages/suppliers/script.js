@@ -2,7 +2,6 @@
 const supplierForm = document.getElementById("supplier-form");
 const tableBody = document.getElementById("suppliers-table-body");
 const searchNumberForm = document.getElementById("search-number-form");
-console.log(viewMessage);
 // Functions =====
 const renderSuppliersTable = (suppliers) => {
   tableBody.innerHTML = "";
