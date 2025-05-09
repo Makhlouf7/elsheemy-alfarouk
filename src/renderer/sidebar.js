@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+      setTimeout(function () {
+        if (typeof applySidebarState === 'function') {
+          applySidebarState();
+        }
+      }, 0);
+    }
+  });
+
   const sidebar = document.querySelector('.sidebar');
 
   if (!sidebar) {
@@ -40,64 +50,78 @@ document.addEventListener('DOMContentLoaded', function () {
     if (textSpan) {
       item.setAttribute('data-title', textSpan.textContent.trim());
     }
+
+    // Get the parent anchor element
+    const parentAnchor = item.closest('a');
+    if (parentAnchor) {
+      // Add click event to prevent sidebar toggle when clicking on nav items
+      item.addEventListener('click', function (e) {
+        // If sidebar is collapsed, prevent event bubbling to avoid toggling sidebar
+        if (sidebar.classList.contains('collapsed')) {
+          // Stop event propagation
+          e.stopPropagation();
+
+          // Navigate to the link directly
+          window.location.href = parentAnchor.getAttribute('href');
+        }
+      });
+    }
   });
 
-  // Set sidebar to collapsed by default, unless explicitly set to expanded
-  const sidebarState = localStorage.getItem('sidebarCollapsed');
+  function applySidebarState(forceState = null) {
+    let isCollapsed;
 
-  // If no state is saved or state is true, collapse the sidebar
-  if (sidebarState !== 'false') {
-    sidebar.classList.add('collapsed');
-
-    // Apply collapsed state to main content
-    const mainContent = document.querySelector('.main-content');
-    if (mainContent) {
-      mainContent.style.marginRight = '70px';
+    if (forceState !== null) {
+      isCollapsed = forceState;
+    } else {
+      const sidebarState = localStorage.getItem('sidebarCollapsed');
+      isCollapsed = sidebarState !== 'false';
     }
 
-    // Update localStorage to remember this state
-    localStorage.setItem('sidebarCollapsed', 'true');
-
-    // Set initial icon state
-    const iconElement = toggleButton.querySelector('span');
-    if (iconElement) {
-      iconElement.textContent = '≡';
-      iconElement.style.transform = 'rotate(0deg)';
+    if (isCollapsed) {
+      sidebar.classList.add('collapsed');
+    } else {
+      sidebar.classList.remove('collapsed');
     }
 
-    // Set initial button title
-    toggleButton.setAttribute('title', 'عرض القائمة');
-  }
-
-  // Add click event to toggle button
-  toggleButton.addEventListener('click', function (e) {
-    console.log('Toggle button clicked');
-
-    // Toggle sidebar class
-    sidebar.classList.toggle('collapsed');
-
-    // Save sidebar state to localStorage
-    const isCollapsed = sidebar.classList.contains('collapsed');
-    localStorage.setItem('sidebarCollapsed', isCollapsed);
-
-    // Apply collapsed state to main content
     const mainContent = document.querySelector('.main-content');
     if (mainContent) {
       mainContent.style.marginRight = isCollapsed ? '70px' : '280px';
+      mainContent.style.width = isCollapsed ? 'calc(100% - 70px)' : 'calc(100% - 280px)';
     }
 
-    // Update button title and icon
-    toggleButton.setAttribute('title', isCollapsed ? 'عرض القائمة' : 'طي القائمة');
-
-    // Update icon direction based on collapsed state
     const iconElement = toggleButton.querySelector('span');
     if (iconElement) {
-      iconElement.textContent = isCollapsed ? '≡' : '≡';
+      iconElement.textContent = '≡';
       iconElement.style.transform = isCollapsed ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
-    console.log('Sidebar collapsed state:', isCollapsed);
+    toggleButton.setAttribute('title', isCollapsed ? 'عرض القائمة' : 'طي القائمة');
+
+    localStorage.setItem('sidebarCollapsed', isCollapsed);
+
+    return isCollapsed;
+  }
+
+  window.applySidebarState = applySidebarState;
+
+  const isCollapsed = applySidebarState();
+
+  toggleButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const currentState = sidebar.classList.contains('collapsed');
+    const newState = !currentState;
+
+    applySidebarState(newState);
   });
 
-  console.log('Sidebar toggle functionality initialized');
+  document.querySelectorAll('.sidebar .icon').forEach(icon => {
+    icon.addEventListener('click', function (e) {
+      if (sidebar.classList.contains('collapsed')) {
+        e.stopPropagation();
+      }
+    });
+  });
 });
