@@ -1,0 +1,73 @@
+/* Icons CSS */
+
+.icon-printer {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ffffff' d='M128 0C110.3 0 96 14.3 96 32V128H32C14.3 128 0 142.3 0 160V416c0 17.7 14.3 32 32 32H96v32c0 17.7 14.3 32 32 32H384c17.7 0 32-14.3 32-32V448h64c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H416V32c0-17.7-14.3-32-32-32H128zM384 352v96H128V352H384zm0-192H128V32H384V160zm80 32a16 16 0 1 1 0 32 16 16 0 1 1 0-32z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* Compact button with printer icon for tables */
+.btn-icon {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 4px !important;
+  border-radius: 4px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: 5px !important;
+}
+
+.btn-icon .icon-printer {
+  margin: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.icon-printer-large {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ffffff' d='M128 0C110.3 0 96 14.3 96 32V128H32C14.3 128 0 142.3 0 160V416c0 17.7 14.3 32 32 32H96v32c0 17.7 14.3 32 32 32H384c17.7 0 32-14.3 32-32V448h64c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H416V32c0-17.7-14.3-32-32-32H128zM384 352v96H128V352H384zm0-192H128V32H384V160zm80 32a16 16 0 1 1 0 32 16 16 0 1 1 0-32z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.icon-printer-green {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23ffffff' d='M128 0C110.3 0 96 14.3 96 32V128H32C14.3 128 0 142.3 0 160V416c0 17.7 14.3 32 32 32H96v32c0 17.7 14.3 32 32 32H384c17.7 0 32-14.3 32-32V448h64c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32H416V32c0-17.7-14.3-32-32-32H128zM384 352v96H128V352H384zm0-192H128V32H384V160zm80 32a16 16 0 1 1 0 32 16 16 0 1 1 0-32z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.icon-trash {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23ffffff' d='M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.btn-icon .icon-trash {
+  margin: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+}
