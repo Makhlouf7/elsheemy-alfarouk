@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <!-- Sidebar -->
-      <nav class="sidebar">
+      <nav class="sidebar collapsed">
         <div class="sidebar-header">
           <h2>لوحة التحكم</h2>
         </div>
@@ -100,7 +100,7 @@
           <div class="form-section">
             <h2>تعديل بيانات العميل</h2>
             <form id="edit-customer-form">
-              <input type="hidden" id="customer-id">
+              <input type="hidden" id="customer-id" />
               <div class="form-group">
                 <label for="customer-name">اسم العميل</label>
                 <input type="text" id="customer-name" required />
@@ -122,10 +122,18 @@
                 <textarea id="notes" rows="3"></textarea>
               </div>
               <div class="form-actions">
-                <button type="button" class="btn btn-secondary" id="cancel-edit">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  id="cancel-edit"
+                >
                   إلغاء
                 </button>
-                <button type="button" class="btn btn-primary" id="save-customer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="save-customer"
+                >
                   حفظ التعديلات
                 </button>
               </div>

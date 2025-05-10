@@ -11,7 +11,7 @@
   <body>
     <div class="container">
       <!-- Sidebar -->
-      <nav class="sidebar">
+      <nav class="sidebar collapsed">
         <div class="sidebar-header">
           <h2>لوحة التحكم</h2>
         </div>
@@ -84,100 +84,125 @@
           </a>
         </ul>
       </nav>
-        <!-- Main Content -->
-        <main class="main-content">
-          <div class="page-header">
-              <h1>رصيد الحجزات</h1>
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="page-header">
+          <h1>رصيد الحجزات</h1>
+        </div>
+
+        <div class="page-content">
+          <div class="form-section">
+            <h2>إضافة حجز جديد</h2>
+            <form id="reservations-form">
+              <div class="form-group">
+                <label for="date">التاريخ</label>
+                <input type="date" id="date" required />
+              </div>
+              <div class="form-group">
+                <label for="customer">العميل</label>
+                <select id="customer" required>
+                  <option value="">اختر العميل</option>
+                  <option value="customer1">أحمد محمد</option>
+                  <option value="customer2">علي محمود</option>
+                  <option value="customer3">سارة أحمد</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="product">المنتج</label>
+                <select id="product" required>
+                  <option value="">اختر المنتج</option>
+                  <option value="product1">منتج 1</option>
+                  <option value="product2">منتج 2</option>
+                  <option value="product3">منتج 3</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="quantity">الكمية</label>
+                <input type="number" id="quantity" min="1" required />
+              </div>
+              <div class="form-group">
+                <label for="price">السعر</label>
+                <input type="number" id="price" min="0" step="0.01" required />
+              </div>
+              <div class="form-group">
+                <label for="total">الإجمالي</label>
+                <input type="number" id="total" readonly />
+              </div>
+              <div class="form-group">
+                <label for="advance">المقدم</label>
+                <input
+                  type="number"
+                  id="advance"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="remaining">المتبقي</label>
+                <input type="number" id="remaining" readonly />
+              </div>
+              <div class="form-group">
+                <label for="notes">ملاحظات</label>
+                <textarea id="notes" rows="3"></textarea>
+              </div>
+              <div class="form-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  id="clear-fields"
+                >
+                  مسح الحقول
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="add-reservation"
+                >
+                  إضافة الحجز
+                </button>
+              </div>
+            </form>
           </div>
 
-          <div class="page-content">
-              <div class="form-section">
-                  <h2>إضافة حجز جديد</h2>
-                  <form id="reservations-form">
-                      <div class="form-group">
-                          <label for="date">التاريخ</label>
-                          <input type="date" id="date" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="customer">العميل</label>
-                          <select id="customer" required>
-                              <option value="">اختر العميل</option>
-                              <option value="customer1">أحمد محمد</option>
-                              <option value="customer2">علي محمود</option>
-                              <option value="customer3">سارة أحمد</option>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="product">المنتج</label>
-                          <select id="product" required>
-                              <option value="">اختر المنتج</option>
-                              <option value="product1">منتج 1</option>
-                              <option value="product2">منتج 2</option>
-                              <option value="product3">منتج 3</option>
-                          </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="quantity">الكمية</label>
-                          <input type="number" id="quantity" min="1" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="price">السعر</label>
-                          <input type="number" id="price" min="0" step="0.01" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="total">الإجمالي</label>
-                          <input type="number" id="total" readonly>
-                      </div>
-                      <div class="form-group">
-                          <label for="advance">المقدم</label>
-                          <input type="number" id="advance" min="0" step="0.01" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="remaining">المتبقي</label>
-                          <input type="number" id="remaining" readonly>
-                      </div>
-                      <div class="form-group">
-                          <label for="notes">ملاحظات</label>
-                          <textarea id="notes" rows="3"></textarea>
-                      </div>
-                      <div class="form-actions">
-                          <button type="button" class="btn btn-secondary" id="clear-fields">مسح الحقول</button>
-                          <button type="button" class="btn btn-primary" id="add-reservation">إضافة الحجز</button>
-                      </div>
-                  </form>
+          <div class="table-section">
+            <div class="table-header">
+              <h2>سجلات الحجزات</h2>
+              <div class="table-actions">
+                <input
+                  type="text"
+                  class="search-input"
+                  id="search-reservations"
+                  placeholder="بحث..."
+                />
+                <button class="btn btn-primary" id="update-reservations">
+                  تحديث
+                </button>
               </div>
-
-              <div class="table-section">
-                  <div class="table-header">
-                      <h2>سجلات الحجزات</h2>
-                      <div class="table-actions">
-                          <input type="text" class="search-input" id="search-reservations" placeholder="بحث...">
-                          <button class="btn btn-primary" id="update-reservations">تحديث</button>
-                      </div>
-                  </div>
-                  <div class="table-container">
-                      <table>
-                          <thead>
-                              <tr>
-                                  <th>التاريخ</th>
-                                  <th>العميل</th>
-                                  <th>المنتج</th>
-                                  <th>الكمية</th>
-                                  <th>السعر</th>
-                                  <th>الإجمالي</th>
-                                  <th>المقدم</th>
-                                  <th>المتبقي</th>
-                                  <th>ملاحظات</th>
-                                  <th>الإجراءات</th>
-                              </tr>
-                          </thead>
-                          <tbody id="reservations-table-body">
-                              <!-- Reservations records will be added here dynamically -->
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>العميل</th>
+                    <th>المنتج</th>
+                    <th>الكمية</th>
+                    <th>السعر</th>
+                    <th>الإجمالي</th>
+                    <th>المقدم</th>
+                    <th>المتبقي</th>
+                    <th>ملاحظات</th>
+                    <th>الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="reservations-table-body">
+                  <!-- Reservations records will be added here dynamically -->
+                </tbody>
+              </table>
+            </div>
           </div>
+        </div>
       </main>
 
       <!-- Main Content -->
