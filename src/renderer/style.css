@@ -144,7 +144,9 @@ a {
   transition: all var(--transition-fast);
   position: relative;
 }
-
+.w-100 {
+  width: 100% !important;
+}
 a:hover {
   color: var(--primary-color);
 }
@@ -1093,7 +1095,7 @@ th:last-child {
 }
 
 td {
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: 12px;
   border-bottom: 1px solid var(--border-color);
   transition: all var(--transition-normal);
 }

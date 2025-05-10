@@ -113,7 +113,13 @@
               </div>
               <div class="form-group">
                 <label for="quantity">الكمية بالطن</label>
-                <input type="number" id="quantity" step="any" min="0.01" required />
+                <input
+                  type="number"
+                  id="quantity"
+                  step="any"
+                  min="0.01"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="shakara">شكاره</label>
@@ -125,11 +131,23 @@
               </div>
               <div class="form-group">
                 <label for="price-in">سعر الطن الوارد</label>
-                <input type="number" id="price-in" step="any" min="0.01" required />
+                <input
+                  type="number"
+                  id="price-in"
+                  step="any"
+                  min="0.01"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="price-out">سعر الطن البيع</label>
-                <input type="number" id="price-out" step="any" min="0" required />
+                <input
+                  type="number"
+                  id="price-out"
+                  step="any"
+                  min="0"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="load-type">نوع الحمولة</label>
@@ -150,12 +168,7 @@
                 </select>
               </div>
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
-                  حفظ
-                </button>
-                <button type="reset" class="btn btn-secondary">
-                  <span class="icon icon-trash"></span>
-                </button>
+                <button type="submit" class="btn btn-primary w-100">حفظ</button>
                 <label class="checkbox-label">
                   <input type="checkbox" id="print" /> طباعة
                 </label>
@@ -168,23 +181,29 @@
               <div class="table-actions">
                 <input type="text" placeholder="بحث..." class="search-input" />
                 <button class="btn btn-primary">تصدير Excel</button>
-                <a href="./print-preview.html" target="_blank" class="btn btn-success" style="background-color: #28a745; margin-right: 10px;"><span class="icon-printer"></span>طباعةالسجل </a>
+                <a
+                  href="./print-preview.html"
+                  target="_blank"
+                  class="btn btn-success"
+                  style="background-color: #28a745; margin-right: 10px"
+                  ><span class="icon-printer"></span>طباعةالسجل
+                </a>
               </div>
             </div>
             <div class="table-container">
               <table>
                 <thead>
-                  <tr style="background-color: #f2f2f2;">
-                    <th style="padding: 10px; font-size: 16px;">التاريخ</th>
-                    <th style="padding: 10px; font-size: 16px;">اسم المورد</th>
-                    <th style="padding: 10px; font-size: 16px;">النوع</th>
-                    <th style="padding: 10px; font-size: 16px;">الكمية</th>
-                    <th style="padding: 10px; font-size: 16px;">شكاره</th>
-                    <th style="padding: 10px; font-size: 16px;">رقم السيارة</th>
-                    <th style="padding: 10px; font-size: 18px; background-color: #0bae4c94; border: 2px solid #000;">سعر الطن</th>
-                    <th style="padding: 10px; font-size: 16px;">نوع الحمولة</th>
-                    <th style="padding: 10px; font-size: 16px;">الصنف</th>
-                    <th style="padding: 10px; font-size: 16px;">إجراءات</th>
+                  <tr style="background-color: #f2f2f2">
+                    <th style="padding: 10px; font-size: 16px">التاريخ</th>
+                    <th style="padding: 10px; font-size: 16px">اسم المورد</th>
+                    <th style="padding: 10px; font-size: 16px">النوع</th>
+                    <th style="padding: 10px; font-size: 16px">الكمية</th>
+                    <th style="padding: 10px; font-size: 16px">شكاره</th>
+                    <th style="padding: 10px; font-size: 16px">رقم السيارة</th>
+                    <th style="padding: 10px; font-size: 18px">الطن (ج)</th>
+                    <th style="padding: 10px; font-size: 16px">نوع الحمولة</th>
+                    <th style="padding: 10px; font-size: 16px">الصنف</th>
+                    <th style="padding: 10px; font-size: 16px">إجراءات</th>
                   </tr>
                 </thead>
                 <tbody id="incoming-table-body">
@@ -196,27 +215,45 @@
                     <td>25.50</td>
                     <td>510</td>
                     <td>ق ص د 123</td>
-                    <td style="font-weight: bold; font-size: 16px; background-color: #f9f9f9; border: 2px solid #000;">18,500 الطن(ج)</td>
+                    <td>18,500</td>
                     <td>عز</td>
                     <td>16</td>
                     <td>
-                      <a href="./supplier-invoice-static.html?autoPrint=true" target="_blank" class="btn btn-primary btn-icon"><span class="icon-printer"></span></a>
-                      <button class="btn btn-danger btn-icon"><span class="icon-trash"></span></button>
+                      <div class="action-buttons">
+                        <a
+                          href="./supplier-invoice-static.html?autoPrint=true"
+                          target="_blank"
+                          class="btn btn-primary btn-icon"
+                          ><span class="icon icon-printer"></span
+                        ></a>
+                        <button class="btn btn-danger">
+                          <span class="icon icon-trash"></span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
-                  <tr style="background-color: #f9f9f9;">
+                  <tr style="background-color: #f9f9f9">
                     <td>12/10/2023</td>
                     <td>شركة الأهرام للحديد</td>
                     <td>حديد تسليح</td>
                     <td>30.75</td>
                     <td>615</td>
                     <td>س ي ن 456</td>
-                    <td style="font-weight: bold; font-size: 16px; background-color: #f9f9f9; border: 2px solid #000;">18,200 الطن(ج)</td>
+                    <td>18,200</td>
                     <td>عز</td>
                     <td>12</td>
                     <td>
-                      <a href="./supplier-invoice-static.html?autoPrint=true" target="_blank" class="btn btn-primary btn-icon"><span class="icon-printer"></span></a>
-                      <button class="btn btn-danger btn-icon"><span class="icon-trash"></span></button>
+                      <div class="action-buttons">
+                        <a
+                          href="./supplier-invoice-static.html?autoPrint=true"
+                          target="_blank"
+                          class="btn btn-primary btn-icon"
+                          ><span class="icon icon-printer"></span
+                        ></a>
+                        <button class="btn btn-danger">
+                          <span class="icon icon-trash"></span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -226,27 +263,45 @@
                     <td>15.25</td>
                     <td>305</td>
                     <td>ع ر ب 789</td>
-                    <td style="font-weight: bold; font-size: 16px; background-color: #f9f9f9; border: 2px solid #000;">18,300 الطن(ج)</td>
+                    <td>18,300</td>
                     <td>استثماري</td>
                     <td>10</td>
                     <td>
-                      <a href="./supplier-invoice-static.html?autoPrint=true" target="_blank" class="btn btn-primary btn-icon"><span class="icon-printer"></span></a>
-                      <button class="btn btn-danger btn-icon"><span class="icon-trash"></span></button>
+                      <div class="action-buttons">
+                        <a
+                          href="./supplier-invoice-static.html?autoPrint=true"
+                          target="_blank"
+                          class="btn btn-primary btn-icon"
+                          ><span class="icon icon-printer"></span
+                        ></a>
+                        <button class="btn btn-danger">
+                          <span class="icon icon-trash"></span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
-                  <tr style="background-color: #f9f9f9;">
+                  <tr style="background-color: #f9f9f9">
                     <td>05/10/2023</td>
                     <td>شركة الصلب العالمية</td>
                     <td>حديد تسليح</td>
                     <td>40.00</td>
                     <td>800</td>
                     <td>ط ك م 321</td>
-                    <td style="font-weight: bold; font-size: 16px; background-color: #f9f9f9; border: 2px solid #000;">18,400 الطن(ج)</td>
+                    <td>18,400</td>
                     <td>كومي</td>
                     <td>16</td>
                     <td>
-                      <a href="./supplier-invoice-static.html?autoPrint=true" target="_blank" class="btn btn-primary btn-icon"><span class="icon-printer"></span></a>
-                      <button class="btn btn-danger btn-icon"><span class="icon-trash"></span></button>
+                      <div class="action-buttons">
+                        <a
+                          href="./supplier-invoice-static.html?autoPrint=true"
+                          target="_blank"
+                          class="btn btn-primary btn-icon"
+                          ><span class="icon icon-printer"></span
+                        ></a>
+                        <button class="btn btn-danger">
+                          <span class="icon icon-trash"></span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -256,15 +311,21 @@
                     <td>22.50</td>
                     <td>450</td>
                     <td>ل و ي 654</td>
-                    <td style="font-weight: bold; font-size: 16px; background-color: #f9f9f9; border: 2px solid #000;">18,100 الطن(ج)</td>
+                    <td>18,100</td>
                     <td>عز</td>
                     <td>12</td>
                     <td>
-                      <a href="./supplier-invoice-static.html?autoPrint=true" target="_blank" class="btn btn-primary btn-icon"><span class="icon-printer"></span></a>
-                      <button class="btn btn-danger btn-icon"><span class="icon-trash"></span></button>
-
-
-
+                      <div class="action-buttons">
+                        <a
+                          href="./supplier-invoice-static.html?autoPrint=true"
+                          target="_blank"
+                          class="btn btn-primary btn-icon"
+                          ><span class="icon icon-printer"></span
+                        ></a>
+                        <button class="btn btn-danger">
+                          <span class="icon icon-trash"></span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -275,6 +336,5 @@
       </main>
     </div>
     <script src="../../sidebar.js"></script>
-    <script src="../../../main/preload.js"></script>
   </body>
 </html>
