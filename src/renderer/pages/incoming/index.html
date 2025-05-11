@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./print-styles.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
+    <link rel="stylesheet" href="../../shared/shared.css" />
     <link rel="stylesheet" href="../../icons.css" />
   </head>
   <body>
@@ -98,17 +99,18 @@
             <form id="incoming-form">
               <div class="form-group">
                 <label for="date">التاريخ</label>
-                <input type="date" id="date" required />
+                <input type="date" id="date" name="date" required />
               </div>
               <div class="form-group">
                 <label for="supplier">اسم المورد</label>
-                <input type="text" id="supplier" required />
+                <select name="supplier" id="supplier-select" required></select>
               </div>
               <div class="form-group">
                 <label for="type">النوع</label>
-                <select id="type" required>
-                  <option value="iron">حديد</option>
-                  <option value="cement">اسمنت</option>
+                <select id="type" name="type" required>
+                  <option value="" hidden>اختر النوع</option>
+                  <option value="حديد">حديد</option>
+                  <option value="اسمنت">اسمنت</option>
                 </select>
               </div>
               <div class="form-group">
@@ -116,6 +118,8 @@
                 <input
                   type="number"
                   id="quantity"
+                  name="quantity"
+                  placeholder="الكمية"
                   step="any"
                   min="0.01"
                   required
@@ -123,43 +127,48 @@
               </div>
               <div class="form-group">
                 <label for="shakara">شكاره</label>
-                <input type="number" id="shakara" required />
+                <input
+                  type="number"
+                  id="shakara"
+                  name="shakara"
+                  placeholder="ادخل العدد"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="car-number">رقم السيارة</label>
-                <input type="text" id="car-number" required />
+                <input
+                  type="text"
+                  id="car-number"
+                  name="carNumber"
+                  placeholder="-------"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="price-in">سعر الطن الوارد</label>
                 <input
                   type="number"
                   id="price-in"
-                  step="any"
-                  min="0.01"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="price-out">سعر الطن البيع</label>
-                <input
-                  type="number"
-                  id="price-out"
-                  step="any"
+                  placeholder="السعر"
+                  name="tonPrice"
                   min="0"
                   required
                 />
               </div>
               <div class="form-group">
                 <label for="load-type">نوع الحمولة</label>
-                <select id="load-type" required>
-                  <option value="az">عز</option>
-                  <option value="estithmari">استثماري</option>
-                  <option value="komy">كومي</option>
+                <select id="load-type" name="loadType" required>
+                  <option value="" hidden>اختر نوع الحمولة</option>
+                  <option value="عز">عز</option>
+                  <option value="استثماري">استثماري</option>
+                  <option value="كومي">كومي</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="category">الصنف</label>
-                <select id="category" required>
+                <select id="category" name="category" required>
+                  <option value="" hidden>اختر الصنف</option>
                   <option value="16">16</option>
                   <option value="12">12</option>
                   <option value="10">10</option>
@@ -179,14 +188,21 @@
             <div class="table-header">
               <h2>سجل الوارد</h2>
               <div class="table-actions">
-                <input type="text" placeholder="بحث..." class="search-input" />
-                <button class="btn btn-primary">تصدير Excel</button>
+                <form id="search-date-form">
+                  <input
+                    type="date"
+                    name="date"
+                    placeholder="بحث..."
+                    class="search-input"
+                  />
+                  <button type="submit" class="btn btn-primary">بحث</button>
+                </form>
                 <a
                   href="./print-preview.html"
                   target="_blank"
-                  class="btn btn-success"
-                  style="background-color: #28a745; margin-right: 10px"
-                  ><span class="icon-printer"></span>طباعةالسجل
+                  class="btn btn-primary"
+                >
+                  طباعةالسجل
                 </a>
               </div>
             </div>
@@ -208,126 +224,6 @@
                 </thead>
                 <tbody id="incoming-table-body">
                   <!-- بيانات وهمية ثابتة للعرض -->
-                  <tr>
-                    <td>15/10/2023</td>
-                    <td>مورد الحديد المصري</td>
-                    <td>حديد تسليح</td>
-                    <td>25.50</td>
-                    <td>510</td>
-                    <td>ق ص د 123</td>
-                    <td>18,500</td>
-                    <td>عز</td>
-                    <td>16</td>
-                    <td>
-                      <div class="action-buttons">
-                        <a
-                          href="./supplier-invoice-static.html?autoPrint=true"
-                          target="_blank"
-                          class="btn btn-primary btn-icon"
-                          ><span class="icon icon-printer"></span
-                        ></a>
-                        <button class="btn btn-danger">
-                          <span class="icon icon-trash"></span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr style="background-color: #f9f9f9">
-                    <td>12/10/2023</td>
-                    <td>شركة الأهرام للحديد</td>
-                    <td>حديد تسليح</td>
-                    <td>30.75</td>
-                    <td>615</td>
-                    <td>س ي ن 456</td>
-                    <td>18,200</td>
-                    <td>عز</td>
-                    <td>12</td>
-                    <td>
-                      <div class="action-buttons">
-                        <a
-                          href="./supplier-invoice-static.html?autoPrint=true"
-                          target="_blank"
-                          class="btn btn-primary btn-icon"
-                          ><span class="icon icon-printer"></span
-                        ></a>
-                        <button class="btn btn-danger">
-                          <span class="icon icon-trash"></span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>10/10/2023</td>
-                    <td>مورد الحديد المصري</td>
-                    <td>حديد تسليح</td>
-                    <td>15.25</td>
-                    <td>305</td>
-                    <td>ع ر ب 789</td>
-                    <td>18,300</td>
-                    <td>استثماري</td>
-                    <td>10</td>
-                    <td>
-                      <div class="action-buttons">
-                        <a
-                          href="./supplier-invoice-static.html?autoPrint=true"
-                          target="_blank"
-                          class="btn btn-primary btn-icon"
-                          ><span class="icon icon-printer"></span
-                        ></a>
-                        <button class="btn btn-danger">
-                          <span class="icon icon-trash"></span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr style="background-color: #f9f9f9">
-                    <td>05/10/2023</td>
-                    <td>شركة الصلب العالمية</td>
-                    <td>حديد تسليح</td>
-                    <td>40.00</td>
-                    <td>800</td>
-                    <td>ط ك م 321</td>
-                    <td>18,400</td>
-                    <td>كومي</td>
-                    <td>16</td>
-                    <td>
-                      <div class="action-buttons">
-                        <a
-                          href="./supplier-invoice-static.html?autoPrint=true"
-                          target="_blank"
-                          class="btn btn-primary btn-icon"
-                          ><span class="icon icon-printer"></span
-                        ></a>
-                        <button class="btn btn-danger">
-                          <span class="icon icon-trash"></span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>01/10/2023</td>
-                    <td>مصنع الدلتا للحديد</td>
-                    <td>حديد تسليح</td>
-                    <td>22.50</td>
-                    <td>450</td>
-                    <td>ل و ي 654</td>
-                    <td>18,100</td>
-                    <td>عز</td>
-                    <td>12</td>
-                    <td>
-                      <div class="action-buttons">
-                        <a
-                          href="./supplier-invoice-static.html?autoPrint=true"
-                          target="_blank"
-                          class="btn btn-primary btn-icon"
-                          ><span class="icon icon-printer"></span
-                        ></a>
-                        <button class="btn btn-danger">
-                          <span class="icon icon-trash"></span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -336,5 +232,7 @@
       </main>
     </div>
     <script src="../../sidebar.js"></script>
+    <script src="../../shared/shared.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

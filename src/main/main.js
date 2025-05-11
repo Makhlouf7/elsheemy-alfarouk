@@ -2,6 +2,7 @@ const { BrowserWindow, app, ipcMain } = require("electron");
 const path = require("path");
 const mongoose = require("mongoose");
 const Supplier = require("../models/suppliers");
+const Incoming = require("../models/incoming");
 const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
 
@@ -35,10 +36,10 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
-// Channels Communications
+// Channels Communications =====
 const models = {
   Supplier,
-  // Add more models as needed
+  Incoming,
 };
 
 ipcMain.handle("get:all", async (event, modelName) => {

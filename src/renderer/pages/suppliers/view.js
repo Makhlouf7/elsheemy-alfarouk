@@ -7,13 +7,14 @@ const supplierPhoneEl = document.getElementById("supplier-phone-display");
 const supplierAddressEl = document.getElementById("supplier-address-display");
 const supplierBalanceEl = document.getElementById("supplier-balance-display");
 const supplierNotesEl = document.getElementById("supplier-notes-display");
+const incomingTableBody = document.getElementById("incoming-table-body");
 
 // Defining Variables =====
 const params = new URLSearchParams(location.search);
 const supplierId = params.get("id");
 
 // Functions =====
-const fillData = async () => {
+const fillData = (async () => {
   const res = await window.dbAPI.getDocById({
     modelName: "Supplier",
     id: supplierId,
@@ -31,6 +32,41 @@ const fillData = async () => {
   supplierBalanceEl.textContent =
     res.data.openingBalance.toLocaleString("en-us");
   supplierNotesEl.textContent = res.data.notes;
+})();
+
+const renderIncomingTable = (incomings) => {
+  incomingTableBody.innerHTML = "";
+  incomings.forEach((doc) => {
+    incomingTableBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr>
+                    <td>${doc.date.toLocaleString("en-gb", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })}</td>
+                    <td>${doc.type}</td>
+                    <td>${doc.quantity}</td>
+                    <td>${doc.shakara}</td>
+                    <td>${doc.carNumber}</td>
+                    <td>${doc.tonPrice.toLocaleString("en-us")}</td>
+                    <td>${doc.loadType}</td>
+                    <td>${doc.category}</td>
+                    
+                  </tr>`
+    );
+  });
 };
 
-fillData();
+const fetchAndRenderIncoming = (async () => {
+  const res = await window.dbAPI.getDocBySearch({
+    modelName: "Incoming",
+    filterOptions: { supplier: supplierId },
+  });
+
+  if (!res.success) {
+    viewMessage("حدث خطأ في احضار البيانات");
+    return;
+  }
+  renderIncomingTable(res.data);
+})();
