@@ -12,29 +12,23 @@ const incomingSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
   },
   date: {
     type: Date,
   },
   loadType: {
     type: String,
-    required: true,
   },
   quantity: {
     type: Number,
     required: true,
   },
-  shakara: {
-    type: Number,
-    required: true,
-  },
-  tonPrice: {
+  price: {
     type: Number,
     required: true,
   },
   type: {
-    type: String,
+    type: String, // "Iron" or "Cement"
     required: true,
   },
 });

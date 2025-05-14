@@ -109,32 +109,12 @@
                 <label for="type">النوع</label>
                 <select id="type" name="type" required>
                   <option value="" hidden>اختر النوع</option>
-                  <option value="حديد">حديد</option>
-                  <option value="اسمنت">اسمنت</option>
+                  <option data-type="iron" value="حديد">حديد</option>
+                  <option data-type="cement" value="اسمنت">اسمنت</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="quantity">الكمية بالطن</label>
-                <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  placeholder="الكمية"
-                  step="any"
-                  min="0.01"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="shakara">شكاره</label>
-                <input
-                  type="number"
-                  id="shakara"
-                  name="shakara"
-                  placeholder="ادخل العدد"
-                  required
-                />
-              </div>
+              <div id="options-based-type"></div>
+
               <div class="form-group">
                 <label for="car-number">رقم السيارة</label>
                 <input
@@ -145,37 +125,7 @@
                   required
                 />
               </div>
-              <div class="form-group">
-                <label for="price-in">سعر الطن الوارد</label>
-                <input
-                  type="number"
-                  id="price-in"
-                  placeholder="السعر"
-                  name="tonPrice"
-                  min="0"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="load-type">نوع الحمولة</label>
-                <select id="load-type" name="loadType" required>
-                  <option value="" hidden>اختر نوع الحمولة</option>
-                  <option value="عز">عز</option>
-                  <option value="استثماري">استثماري</option>
-                  <option value="كومي">كومي</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="category">الصنف</label>
-                <select id="category" name="category" required>
-                  <option value="" hidden>اختر الصنف</option>
-                  <option value="16">16</option>
-                  <option value="12">12</option>
-                  <option value="10">10</option>
-                  <option value="8">8</option>
-                  <option value="7">7</option>
-                </select>
-              </div>
+
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary w-100">حفظ</button>
                 <label class="checkbox-label">
@@ -197,13 +147,6 @@
                   />
                   <button type="submit" class="btn btn-primary">بحث</button>
                 </form>
-                <a
-                  href="./print-preview.html"
-                  target="_blank"
-                  class="btn btn-primary"
-                >
-                  طباعةالسجل
-                </a>
               </div>
             </div>
             <div class="table-container">
@@ -214,11 +157,11 @@
                     <th style="padding: 10px; font-size: 16px">اسم المورد</th>
                     <th style="padding: 10px; font-size: 16px">النوع</th>
                     <th style="padding: 10px; font-size: 16px">الكمية</th>
-                    <th style="padding: 10px; font-size: 16px">شكاره</th>
                     <th style="padding: 10px; font-size: 16px">رقم السيارة</th>
-                    <th style="padding: 10px; font-size: 18px">الطن (ج)</th>
+                    <th style="padding: 10px; font-size: 18px">السعر (ج)</th>
                     <th style="padding: 10px; font-size: 16px">نوع الحمولة</th>
                     <th style="padding: 10px; font-size: 16px">الصنف</th>
+                    <th style="padding: 10px; font-size: 16px">الاجمالي</th>
                     <th style="padding: 10px; font-size: 16px">إجراءات</th>
                   </tr>
                 </thead>

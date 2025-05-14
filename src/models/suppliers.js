@@ -27,8 +27,22 @@ supplierSchema.post("find", function (docs) {
   docs.forEach((doc) => (doc._id = doc._id.toString()));
 });
 
-supplierSchema.post("findOne", function (doc) {
+supplierSchema.post("findOne", async function (doc) {
   if (!doc) return;
+  result = await Incoming.aggregate([
+    {
+      $match: {
+        supplier: doc._id,
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        total: { $sum: { $multiply: ["$price", "$quantity"] } },
+      },
+    },
+  ]);
+  doc.totalInvoices = result[0]?.total || 0;
   doc._id = doc._id.toString();
 });
 

@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const Supplier = require("../models/suppliers");
 const Incoming = require("../models/incoming");
+const Customer = require("../models/customers");
 const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
 
@@ -40,6 +41,7 @@ app.on("window-all-closed", () => {
 const models = {
   Supplier,
   Incoming,
+  Customer,
 };
 
 ipcMain.handle("get:all", async (event, modelName) => {
@@ -57,6 +59,7 @@ ipcMain.handle("get:byId", async (event, { modelName, id }) => {
   try {
     const Model = models[modelName];
     const doc = await Model.findById(id);
+    console.log(doc);
     return { success: true, data: doc };
   } catch (error) {
     console.error(error);
@@ -77,7 +80,6 @@ ipcMain.handle("get:byFilter", async (event, { modelName, filterOptions }) => {
 
 ipcMain.handle("create:doc", async (event, { modelName, data }) => {
   const Model = models[modelName];
-  console.log(data);
   try {
     await Model.create(data);
     return { success: true };

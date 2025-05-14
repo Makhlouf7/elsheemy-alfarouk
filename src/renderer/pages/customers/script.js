@@ -1,172 +1,62 @@
-// Array to store customers
-let customers = [];
+const customerForm = document.getElementById("customer-form");
+const tableBody = document.getElementById("customers-table-body");
 
-// Sample data for testing
-const sampleCustomers = [
-  {
-    id: 1,
-    name: "أحمد محمد",
-    phone: "0123456789",
-    address: "شارع النصر - القاهرة",
-    balance: 5000,
-    notes: "عميل دائم",
-  },
-  {
-    id: 2,
-    name: "محمد علي",
-    phone: "0112345678",
-    address: "شارع الحرية - الإسكندرية",
-    balance: 3000,
-    notes: "عميل جديد",
-  },
-];
-
-// Initialize customers with sample data
-customers = [...sampleCustomers];
-
-// DOM Elements
-const form = document.getElementById("customer-form");
-const customerNameInput = document.getElementById("customer-name");
-const phoneInput = document.getElementById("phone");
-const addressInput = document.getElementById("address");
-const balanceInput = document.getElementById("balance");
-const notesInput = document.getElementById("notes");
-const clearButton = document.getElementById("clear-fields");
-const addButton = document.getElementById("add-customer");
-const updateButton = document.getElementById("update-customers");
-const searchInput = document.getElementById("search-customer");
-const customersTableBody = document.getElementById("customers-table-body");
-
-// Clear form fields
-clearButton.addEventListener("click", () => {
-  form.reset();
-});
-
-// Add new customer
-addButton.addEventListener("click", () => {
-  if (!form.checkValidity()) {
-    alert("الرجاء ملء جميع الحقول المطلوبة");
-    return;
-  }
-
-  const newCustomer = {
-    id: customers.length + 1,
-    name: customerNameInput.value,
-    phone: phoneInput.value,
-    address: addressInput.value,
-    balance: parseFloat(balanceInput.value),
-    notes: notesInput.value,
-  };
-
-  customers.push(newCustomer);
-  updateCustomersTable();
-  form.reset();
-});
-
-// Update customers table
-function updateCustomersTable() {
-  customersTableBody.innerHTML = "";
-
-  customers.forEach((customer) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-            <td>${customer.name}</td>
-            <td>${customer.phone}</td>
-            <td>${customer.address}</td>
-            <td>${formatCurrency(customer.balance)}</td>
-            <td>${customer.notes || "-"}</td>
-            <td>
-                <div class="action-buttons">
-                    <button class="btn btn-info" onclick="viewCustomerProfile(${customer.id
-      })">
-                        <span class="icon icon-eye"></span>
-                    </button>
-                    <button class="btn btn-primary" onclick="editCustomer(${customer.id
-      })">
-                        <span class="icon icon-edit"></span>
-                    </button>
-                    <button class="btn btn-danger" onclick="deleteCustomer(${customer.id
-      })">
-                        <span class="icon icon-trash"></span>
-                    </button>
-                </div>
-            </td>
-        `;
-    customersTableBody.appendChild(row);
+// Functions =====
+const renderCustomersTable = (customers) => {
+  tableBody.innerHTML = "";
+  customers.forEach((doc) => {
+    tableBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr>
+                <td>${doc.name}</td>
+                <td>${doc.phone}</td>
+                <td>${doc.address}</td>
+                <td>${doc.balance}</td>
+                <td>${doc.notes}</td>
+                <td>
+                    <div class="action-buttons">
+                        <a href="./view.html?id=${doc._id}" class="btn btn-info">
+                            <span class="icon icon-eye"></span>
+                        </a>
+                        <a href="./edit.html?id=${doc._id}" class="btn btn-primary">
+                            <span class="icon icon-edit"></span>
+                        </a>
+                        <button
+                          data-id="${doc._id}"
+                          onclick="deleteDoc('${doc._id}')"
+                          class="btn btn-danger"
+                      >
+                          <span class="icon icon-trash"></span>
+                      </button>
+                    </div>
+                </td>
+            </tr>`
+    );
   });
-}
+};
 
-// Edit customer
-function editCustomer(id) {
-  // Navigate to the edit page with the customer ID
-  window.location.href = `../edit/index.html?id=${id}`;
-}
+// Fetch customers data and renders it in the table
+const fetchAndRenderCustomers = async () => {
+  const customers = await window.dbAPI.getAllData("Customer");
+  renderCustomersTable(customers);
+};
 
-// Delete customer
-function deleteCustomer(id) {
-  if (confirm("هل أنت متأكد من حذف هذا العميل؟")) {
-    customers = customers.filter((c) => c.id !== id);
-    updateCustomersTable();
-  }
-}
+// Event Handlers =====
 
-// View customer profile
-function viewCustomerProfile(id) {
-  window.location.href = `../profile/index.html?id=${id}`;
-}
-
-// Format currency
-function formatCurrency(amount) {
-  return new Intl.NumberFormat("ar-EG", {
-    style: "currency",
-    currency: "EGP",
-  }).format(amount);
-}
-
-// Search customers
-searchInput.addEventListener("input", function (e) {
-  const searchTerm = e.target.value.toLowerCase();
-  const filteredCustomers = customers.filter(
-    (customer) =>
-      customer.name.toLowerCase().includes(searchTerm) ||
-      customer.phone.includes(searchTerm) ||
-      customer.address.toLowerCase().includes(searchTerm)
-  );
-
-  customersTableBody.innerHTML = "";
-  filteredCustomers.forEach((customer) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-            <td>${customer.name}</td>
-            <td>${customer.phone}</td>
-            <td>${customer.address}</td>
-            <td>${formatCurrency(customer.balance)}</td>
-            <td>${customer.notes || "-"}</td>
-            <td>
-                <div class="action-buttons">
-                    <button class="btn btn-info" onclick="viewCustomerProfile(${customer.id
-      })">
-                        <span class="icon icon-eye"></span>
-                    </button>
-                    <button class="btn btn-primary" onclick="editCustomer(${customer.id
-      })">
-                        <span class="icon icon-edit"></span>
-                    </button>
-                    <button class="btn btn-danger" onclick="deleteCustomer(${customer.id
-      })">
-                        <span class="icon icon-trash"></span>
-                    </button>
-                </div>
-            </td>
-        `;
-    customersTableBody.appendChild(row);
+customerForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const data = collectFormData(customerForm);
+  console.log(data);
+  const res = await window.dbAPI.createDoc({
+    modelName: "Customer",
+    data,
   });
+  if (!res.success) {
+    viewMessage("حدث خطأ أثناء الاضافة");
+  }
+  customerForm.reset();
+  viewMessage("تمت الاضافة بنجاح");
+  fetchAndRenderCustomers();
 });
 
-// Update customers button
-updateButton.addEventListener("click", () => {
-  updateCustomersTable();
-});
-
-// Initialize the page
-updateCustomersTable();
+fetchAndRenderCustomers();

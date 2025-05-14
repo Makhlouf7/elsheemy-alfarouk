@@ -5,7 +5,10 @@ const contactPersonEl = document.getElementById(
 );
 const supplierPhoneEl = document.getElementById("supplier-phone-display");
 const supplierAddressEl = document.getElementById("supplier-address-display");
-const supplierBalanceEl = document.getElementById("supplier-balance-display");
+const supplierBalanceEl = document.getElementById("supplier-balance-paid");
+const supplierTotalInvoicesEl = document.getElementById(
+  "supplier-invoice-display"
+);
 const supplierNotesEl = document.getElementById("supplier-notes-display");
 const incomingTableBody = document.getElementById("incoming-table-body");
 
@@ -19,7 +22,6 @@ const fillData = (async () => {
     modelName: "Supplier",
     id: supplierId,
   });
-
   if (!res.success) {
     viewMessage("حدث خطأ في احضار البيانات");
     return;
@@ -32,6 +34,8 @@ const fillData = (async () => {
   supplierBalanceEl.textContent =
     res.data.openingBalance.toLocaleString("en-us");
   supplierNotesEl.textContent = res.data.notes;
+  supplierTotalInvoicesEl.textContent =
+    res.data.totalInvoices.toLocaleString("en-us");
 })();
 
 const renderIncomingTable = (incomings) => {
@@ -47,11 +51,13 @@ const renderIncomingTable = (incomings) => {
                     })}</td>
                     <td>${doc.type}</td>
                     <td>${doc.quantity}</td>
-                    <td>${doc.shakara}</td>
                     <td>${doc.carNumber}</td>
-                    <td>${doc.tonPrice.toLocaleString("en-us")}</td>
-                    <td>${doc.loadType}</td>
-                    <td>${doc.category}</td>
+                    <td>${doc.price.toLocaleString("en-us")}</td>
+                    <td>${doc.loadType || "-"}</td>
+                    <td>${doc.category || "-"}</td>
+                    <td>${(doc.price * doc.quantity).toLocaleString(
+                      "en-us"
+                    )}</td>
                     
                   </tr>`
     );

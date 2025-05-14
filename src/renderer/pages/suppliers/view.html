@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';"
+    /> -->
+
     <title>بروفايل المورد</title>
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./view.css" />
@@ -128,8 +133,12 @@
               </div>
 
               <div class="supplier-info-item">
-                <h3>الرصيد الافتتاحي</h3>
-                <p id="supplier-balance-display">0.00</p>
+                <h3>الرصيد المدفوع للمورد</h3>
+                <p id="supplier-balance-paid">0.00</p>
+              </div>
+              <div class="supplier-info-item">
+                <h3>اجمالي فواتير المورد</h3>
+                <p id="supplier-invoice-display">0.00</p>
               </div>
 
               <div class="supplier-info-item" style="grid-column: span 2">
@@ -147,11 +156,11 @@
                 <th style="padding: 10px; font-size: 16px">التاريخ</th>
                 <th style="padding: 10px; font-size: 16px">النوع</th>
                 <th style="padding: 10px; font-size: 16px">الكمية</th>
-                <th style="padding: 10px; font-size: 16px">شكاره</th>
                 <th style="padding: 10px; font-size: 16px">رقم السيارة</th>
-                <th style="padding: 10px; font-size: 18px">الطن (ج)</th>
+                <th style="padding: 10px; font-size: 18px">السعر (ج)</th>
                 <th style="padding: 10px; font-size: 16px">نوع الحمولة</th>
                 <th style="padding: 10px; font-size: 16px">الصنف</th>
+                <th style="padding: 10px; font-size: 16px">الاجمالي</th>
               </tr>
             </thead>
             <tbody id="incoming-table-body">
