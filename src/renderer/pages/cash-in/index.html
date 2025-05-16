@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>وارد خزنه</title>
+    <link rel="stylesheet" href="../../shared/shared.css" />
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
@@ -98,38 +99,48 @@
             <form id="cash-in-form">
               <div class="form-group">
                 <label for="date">التاريخ</label>
-                <input type="date" id="date" required />
+                <input type="date" name="date" id="date" required />
               </div>
               <div class="form-group">
                 <label for="amount">المبلغ</label>
-                <input type="number" id="amount" min="0" step="0.01" required />
+                <input
+                  type="number"
+                  id="amount"
+                  name="amount"
+                  min="0"
+                  step="0.01"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="source">المصدر</label>
-                <select id="source" required>
+                <select id="source" name="source" required>
                   <option value="">اختر المصدر</option>
-                  <option value="sales">مبيعات</option>
-                  <option value="customers">عملاء</option>
-                  <option value="other">أخرى</option>
+                  <option value="مبيعات">مبيعات</option>
+                  <option value="عملاء">عملاء</option>
+                  <option value="أخرى">أخرى</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="description">الوصف</label>
-                <textarea id="description" rows="3" required></textarea>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="3"
+                  required
+                ></textarea>
               </div>
               <div class="form-group">
                 <label for="reference">المرجع</label>
-                <input type="text" id="reference" required />
+                <input type="text" name="reviewer" id="reference" required />
               </div>
+              <input type="text" name="transactionType" value="income" hidden />
               <div class="form-actions">
                 <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="clear-fields"
+                  type="submit"
+                  class="btn btn-primary w-100"
+                  id="add-cash-in"
                 >
-                  مسح الحقول
-                </button>
-                <button type="button" class="btn btn-primary" id="add-cash-in">
                   إضافة الوارد
                 </button>
               </div>
@@ -140,15 +151,17 @@
             <div class="table-header">
               <h2>قائمة الواردات</h2>
               <div class="table-actions">
-                <input
-                  type="text"
-                  class="search-input"
-                  id="search-cash-in"
-                  placeholder="بحث..."
-                />
-                <button class="btn btn-primary" id="update-cash-in">
-                  تحديث
-                </button>
+                <form id="filter-date-form">
+                  <input
+                    type="date"
+                    name="date"
+                    class="search-input"
+                    id="date-filter"
+                  />
+                  <button class="btn btn-primary" id="update-cash-in">
+                    بحث
+                  </button>
+                </form>
               </div>
             </div>
             <div class="table-container">
@@ -168,29 +181,19 @@
                 </tbody>
               </table>
             </div>
+            <div class="total-section">
+              <div class="total-amount-container">
+                <span class="total-label">إجمالي الوارد:</span>
+                <span class="total-value" id="total-income"></span>
+              </div>
+            </div>
           </div>
         </div>
       </main>
     </div>
 
     <script src="../../sidebar.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (typeof window.applySidebarState === "function") {
-          setTimeout(function () {
-            window.applySidebarState();
-          }, 100);
-        }
-      });
-
-      window.addEventListener("pageshow", function (event) {
-        if (event.persisted && typeof window.applySidebarState === "function") {
-          setTimeout(function () {
-            window.applySidebarState();
-          }, 100);
-        }
-      });
-    </script>
-    <script src="script.js"></script>
+    <script src="../../shared/shared.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

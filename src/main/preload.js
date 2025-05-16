@@ -12,4 +12,7 @@ contextBridge.exposeInMainWorld("dbAPI", {
     ipcRenderer.invoke("delete:byId", { modelName, id }),
   getDocBySearch: ({ modelName, filterOptions }) =>
     ipcRenderer.invoke("get:byFilter", { modelName, filterOptions }),
+  // Statistics Functions
+  generalStatistics: (options = {}) =>
+    ipcRenderer.invoke("stats:all", { date: options.date }),
 });

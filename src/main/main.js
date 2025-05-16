@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Supplier = require("../models/suppliers");
 const Incoming = require("../models/incoming");
 const Customer = require("../models/customers");
+const Safe = require("../models/safe");
 const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
 
@@ -42,6 +43,7 @@ const models = {
   Supplier,
   Incoming,
   Customer,
+  Safe,
 };
 
 ipcMain.handle("get:all", async (event, modelName) => {
@@ -109,4 +111,19 @@ ipcMain.handle("delete:byId", async (event, { modelName, id }) => {
     console.error(`DB error delete ${modelName}:`, err);
     return { success: false };
   }
+});
+
+ipcMain.handle("stats:all", async (event, statOptions) => {
+  console.log("StatOptions", statOptions);
+  const safeTotalIncomes = await Safe.totalIncomes(statOptions.date);
+  const safeTotalExpenses = await Safe.totalExpenses(statOptions.date);
+  const safeTotalBalance = safeTotalIncomes - safeTotalExpenses;
+  return {
+    success: true,
+    data: {
+      safeTotalIncomes,
+      safeTotalExpenses,
+      safeTotalBalance,
+    },
+  };
 });

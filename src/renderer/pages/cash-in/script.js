@@ -1,201 +1,112 @@
-// Array to store cash-in records
-let cashInRecords = [];
-
-// DOM Elements
-const form = document.getElementById("cash-in-form");
-const dateInput = document.getElementById("date");
-const amountInput = document.getElementById("amount");
-const sourceInput = document.getElementById("source");
-const descriptionInput = document.getElementById("description");
-const referenceInput = document.getElementById("reference");
-const clearButton = document.getElementById("clear-fields");
-const addButton = document.getElementById("add-cash-in");
-const updateButton = document.getElementById("update-cash-in");
-const searchInput = document.getElementById("search-cash-in");
-const cashInTableBody = document.getElementById("cash-in-table-body");
-const totalAmountElement = document.createElement("div");
-totalAmountElement.className = "total-amount";
-document.querySelector(".table-section").appendChild(totalAmountElement);
-
-// Set today's date as default
-dateInput.valueAsDate = new Date();
-
-// Clear form fields
-clearButton.addEventListener("click", () => {
-  form.reset();
-  dateInput.valueAsDate = new Date();
-});
-
-// Add new cash-in record
-addButton.addEventListener("click", () => {
-  // Validate form
-  if (!form.checkValidity()) {
-    alert("الرجاء ملء جميع الحقول المطلوبة");
-    return;
-  }
-
-  // Validate amount
-  const amount = parseFloat(amountInput.value);
-  if (isNaN(amount) || amount <= 0) {
-    alert("الرجاء إدخال مبلغ صحيح أكبر من صفر");
-    return;
-  }
-
-  // Create new record
-  const newRecord = {
-    id: Date.now(),
-    date: dateInput.value,
-    amount: amount,
-    source: sourceInput.value,
-    description: descriptionInput.value,
-    reference: referenceInput.value,
-  };
-
-  // Add to records array
-  cashInRecords.push(newRecord);
-
-  // Update table
-  updateCashInTable();
-
-  // Reset form
-  form.reset();
-  dateInput.valueAsDate = new Date();
-});
-
-// Update cash-in table
-function updateCashInTable() {
-  cashInTableBody.innerHTML = "";
-  let totalAmount = 0;
-
-  cashInRecords.forEach((record) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-            <td>${formatDate(record.date)}</td>
-            <td>${formatCurrency(record.amount)}</td>
-            <td>${getSourceName(record.source)}</td>
-            <td>${record.description}</td>
-            <td>${record.reference}</td>
-            <td>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editRecord(${record.id
-      })">
-                        <span class="icon icon-edit"></span>
-                    </button>
-                    <button class="btn btn-danger" onclick="deleteRecord(${record.id
-      })">
-                        <span class="icon icon-trash"></span>
-                    </button>
-                </div>
-            </td>
-        `;
-    cashInTableBody.appendChild(row);
-    totalAmount += record.amount;
+"use strict";
+const cashInForm = document.getElementById("cash-in-form");
+const tableBody = document.getElementById("cash-in-table-body");
+const filterDateForm = document.getElementById("filter-date-form");
+const totalEl = document.getElementById("total-income");
+// Functions =====
+const renderCashInTable = (cashIn) => {
+  tableBody.innerHTML = "";
+  console.log(cashIn);
+  cashIn.forEach((doc) => {
+    tableBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr>
+                <td>${doc.date.toLocaleString("en-gb", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}</td>
+                <td>${doc.amount.toLocaleString("en-us")}</td>
+                <td>${doc.source}</td>
+                <td>${doc.description}</td>
+                <td>${doc.reviewer}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button
+                          data-id="${doc._id}"
+                          onclick="deleteDoc('${doc._id}')"
+                          class="btn btn-danger"
+                      >
+                          <span class="icon icon-trash"></span>
+                      </button>
+                    </div>
+                </td>
+            </tr>`
+    );
   });
+};
 
-  // Update total amount display
-  totalAmountElement.innerHTML = `
-        <div class="total-amount-container">
-            <span class="total-label">إجمالي الوارد:</span>
-            <span class="total-value">${formatCurrency(totalAmount)}</span>
-        </div>
-    `;
-}
-
-// Edit record
-function editRecord(id) {
-  const record = cashInRecords.find((r) => r.id === id);
-  if (record) {
-    dateInput.value = record.date;
-    amountInput.value = record.amount;
-    sourceInput.value = record.source;
-    descriptionInput.value = record.description;
-    referenceInput.value = record.reference;
-
-    // Remove the record from the list
-    cashInRecords = cashInRecords.filter((r) => r.id !== id);
-    updateCashInTable();
+// Fetch cashIn data and renders it in the table
+const fetchAndRenderCashIn = async () => {
+  const cashIn = await window.dbAPI.getDocBySearch({
+    modelName: "Safe",
+    filterOptions: { transactionType: "income" },
+  });
+  console.log(cashIn);
+  const stats = await window.dbAPI.generalStatistics();
+  if (!stats.success) {
+    viewMessage("حدث خطأ اثناء احصاء الخزنة");
+    return;
   }
-}
-
-// Delete record
-function deleteRecord(id) {
-  if (confirm("هل أنت متأكد من حذف هذا السجل؟")) {
-    cashInRecords = cashInRecords.filter((r) => r.id !== id);
-    updateCashInTable();
-  }
-}
-
-// Format date to Gregorian format
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  // Format as DD/MM/YYYY
-  return `${day}/${month}/${year}`;
-}
-
-// Format currency
-function formatCurrency(amount) {
-  return new Intl.NumberFormat("ar-EG", {
+  renderCashInTable(cashIn.data);
+  totalEl.innerText = stats.data.safeTotalIncomes.toLocaleString("en-us", {
     style: "currency",
     currency: "EGP",
-  }).format(amount);
-}
-
-// Get source name in Arabic
-function getSourceName(source) {
-  const sources = {
-    sales: "مبيعات",
-    customers: "عملاء",
-    other: "أخرى",
-  };
-  return sources[source] || source;
-}
-
-// Search records
-searchInput.addEventListener("input", function (e) {
-  const searchTerm = e.target.value.toLowerCase();
-  const filteredRecords = cashInRecords.filter(
-    (record) =>
-      formatDate(record.date).includes(searchTerm) ||
-      formatCurrency(record.amount).includes(searchTerm) ||
-      getSourceName(record.source).toLowerCase().includes(searchTerm) ||
-      record.description.toLowerCase().includes(searchTerm) ||
-      record.reference.toLowerCase().includes(searchTerm)
-  );
-
-  cashInTableBody.innerHTML = "";
-  filteredRecords.forEach((record) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-            <td>${formatDate(record.date)}</td>
-            <td>${formatCurrency(record.amount)}</td>
-            <td>${getSourceName(record.source)}</td>
-            <td>${record.description}</td>
-            <td>${record.reference}</td>
-            <td>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="editRecord(${record.id
-      })">
-                        <span class="icon icon-edit"></span>
-                    </button>
-                    <button class="btn btn-danger" onclick="deleteRecord(${record.id
-      })">
-                        <span class="icon icon-trash"></span>
-                    </button>
-                </div>
-            </td>
-        `;
-    cashInTableBody.appendChild(row);
   });
+};
+
+// Event Handlers =====
+
+const deleteDoc = async function (id) {
+  const res = await window.dbAPI.deleteDocById({ modelName: "Safe", id });
+
+  if (!res.success) {
+    viewMessage("حدث خطأ أثناء المسح");
+    return;
+  }
+  viewMessage("تم المسح بنجاح");
+  fetchAndRenderCashIn();
+};
+
+filterDateForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const collected = collectFormData(filterDateForm);
+  const stats = await window.dbAPI.generalStatistics({ date: collected.date });
+  const res = await window.dbAPI.getDocBySearch({
+    modelName: "Safe",
+    filterOptions: { date: collected.date },
+  });
+
+  if (!res.success || !stats.success) {
+    viewMessage("حدث خطأ اثناء البحث");
+    return;
+  }
+  totalEl.innerText = stats.data.safeTotalIncomes.toLocaleString("en-us", {
+    style: "currency",
+    currency: "EGP",
+  });
+  renderCashInTable(res.data);
 });
 
-// Update button
-updateButton.addEventListener("click", () => {
-  updateCashInTable();
+cashInForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = collectFormData(cashInForm);
+  console.log(data);
+  const res = await window.dbAPI.createDoc({
+    modelName: "Safe",
+    data,
+  });
+  console.log(res);
+  if (!res.success) {
+    viewMessage("حدث خطأ اثناء الاضافة");
+    return;
+  }
+
+  viewMessage("تم الاضافة بنجاح");
+
+  cashInForm.reset();
+  await fetchAndRenderCashIn();
 });
 
-// Initialize the page
-updateCashInTable();
+// View cashIn data once page is loaded
+fetchAndRenderCashIn();
