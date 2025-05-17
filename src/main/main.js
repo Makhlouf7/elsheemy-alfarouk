@@ -47,6 +47,7 @@ const models = {
   Customer,
   Safe,
   Employee,
+  Attendance,
 };
 
 ipcMain.handle("get:all", async (event, modelName) => {
@@ -77,7 +78,7 @@ ipcMain.handle("get:byFilter", async (event, { modelName, filterOptions }) => {
     const Model = models[modelName];
     const docs = await Model.find(filterOptions);
     return { success: true, data: docs };
-  } catch (error) {
+  } catch (err) {
     console.error(`DB error filtering ${modelName}`, err);
     return { success: false };
   }
@@ -130,6 +131,20 @@ ipcMain.handle("stats:all", async (event, statOptions) => {
     },
   };
 });
+
+ipcMain.handle(
+  "delete:all",
+  async (event, { modelName, filterOptions = {} }) => {
+    const Model = models[modelName];
+    try {
+      await Model.deleteMany(filterOptions);
+      return { success: true };
+    } catch (err) {
+      console.error(`DB error deleting all ${modelName}:`, err);
+      return { success: false };
+    }
+  }
+);
 
 // Attendance function only
 ipcMain.handle("upsert:attendance", async (event, data) => {

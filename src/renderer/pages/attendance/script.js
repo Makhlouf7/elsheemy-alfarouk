@@ -1,5 +1,6 @@
 "use strict";
 const tableBody = document.getElementById("attendance-table-body");
+const deleteBtn = document.getElementById("delete-all");
 
 const upsertAttendance = async (data) => {
   const res = await window.dbAPI.upsertAttendance(data);
@@ -69,3 +70,16 @@ const fetchAndRenderEmployees = async () => {
 };
 
 fetchAndRenderEmployees();
+
+// Event Handlers =====
+deleteBtn.addEventListener("click", async () => {
+  const res = await window.dbAPI.deleteAllDocs({
+    modelName: "Attendance",
+    filterOptions: {},
+  });
+  if (!res.success) {
+    viewMessage("حدث خطأ في حذف السجلات");
+    return;
+  }
+  viewMessage("تم حذف جميع السجلات بنجاح");
+});

@@ -6,6 +6,7 @@
     <title>بروفايل الموظف</title>
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="./view.css" />
+    <link rel="stylesheet" href="../../shared/shared.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
   </head>
   <body>
@@ -159,6 +160,9 @@
           <div class="attendance-section">
             <div class="section-header">
               <h2>سجل الحضور والانصراف</h2>
+              <button class="btn btn-primary" id="delete-records">
+                مسح السجل
+              </button>
             </div>
             <div class="table-container">
               <table>
@@ -168,7 +172,6 @@
                     <th>الحالة</th>
                     <th>وقت الحضور</th>
                     <th>وقت الانصراف</th>
-                    <th>ملاحظات</th>
                   </tr>
                 </thead>
                 <tbody id="attendance-table-body">
@@ -182,6 +185,7 @@
     </div>
 
     <script src="../../sidebar.js"></script>
+    <script src="../../shared/shared.js"></script>
     <script src="./view.js"></script>
   </body>
 </html>
