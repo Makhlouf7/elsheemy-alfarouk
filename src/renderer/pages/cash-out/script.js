@@ -72,7 +72,7 @@ filterDateForm.addEventListener("submit", async (e) => {
   const stats = await window.dbAPI.generalStatistics({ date: collected.date });
   const res = await window.dbAPI.getDocBySearch({
     modelName: "Safe",
-    filterOptions: { date: collected.date },
+    filterOptions: { date: collected.date, transactionType: "expense" },
   });
 
   if (!res.success || !stats.success) {

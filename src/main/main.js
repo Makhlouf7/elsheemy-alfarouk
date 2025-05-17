@@ -5,6 +5,8 @@ const Supplier = require("../models/suppliers");
 const Incoming = require("../models/incoming");
 const Customer = require("../models/customers");
 const Safe = require("../models/safe");
+const Employee = require("../models/employees");
+const Attendance = require("../models/attendance");
 const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
 
@@ -44,6 +46,7 @@ const models = {
   Incoming,
   Customer,
   Safe,
+  Employee,
 };
 
 ipcMain.handle("get:all", async (event, modelName) => {
@@ -126,4 +129,21 @@ ipcMain.handle("stats:all", async (event, statOptions) => {
       safeTotalBalance,
     },
   };
+});
+
+// Attendance function only
+ipcMain.handle("upsert:attendance", async (event, data) => {
+  try {
+    console.log("Data", data);
+    const { employeeId, date } = data;
+    await Attendance.findOneAndUpdate(
+      { employeeId, date },
+      { $set: data },
+      { upsert: true, new: true }
+    );
+    return { success: true };
+  } catch (err) {
+    console.error("Error upserting attendance:", err);
+    return { success: false };
+  }
 });

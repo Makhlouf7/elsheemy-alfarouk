@@ -89,7 +89,7 @@
       <!-- Main Content -->
       <main class="main-content">
         <div class="page-header">
-          <h1>إدارة الموظفين</h1>
+          <h1>حساب الموظفين</h1>
         </div>
 
         <div class="page-content">
@@ -98,52 +98,60 @@
             <form id="employee-form">
               <div class="form-group">
                 <label for="employee-name">اسم الموظف</label>
-                <input type="text" id="employee-name" required />
-              </div>
-              <div class="form-group">
-                <label for="job-title">المسمى الوظيفي</label>
-                <input type="text" id="job-title" required />
+                <input type="text" name="name" id="employee-name" required />
               </div>
               <div class="form-group">
                 <label for="phone">رقم الهاتف</label>
-                <input type="tel" id="phone" required />
+                <input
+                  type="tel"
+                  pattern="^[0-9]{11}"
+                  title="رقم الهاتف يجب أن يحتوي على أرقام فقط ويكون 11 رقمًا"
+                  minlength="11"
+                  maxlength="11"
+                  id="phone"
+                  name="phone"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="address">العنوان</label>
-                <input type="text" id="address" required />
+                <input type="text" name="address" id="address" required />
               </div>
               <div class="form-group">
                 <label for="salary">الراتب الشهري</label>
-                <input type="number" id="salary" min="0" required />
+                <input
+                  type="number"
+                  name="salary"
+                  id="salary"
+                  min="0"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="hire-date">تاريخ التعيين</label>
-                <input type="date" id="hire-date" required />
+                <input type="date" name="hireDate" id="hire-date" required />
               </div>
               <div class="form-group">
                 <label for="department">القسم</label>
-                <select id="department" required>
+                <select id="department" name="department" required>
                   <option value="">اختر القسم</option>
-                  <option value="production">الإنتاج</option>
-                  <option value="sales">المبيعات</option>
-                  <option value="accounting">المحاسبة</option>
-                  <option value="management">الإدارة</option>
-                  <option value="other">أخرى</option>
+                  <option value="الإنتاج">الإنتاج</option>
+                  <option value="المبيعات">المبيعات</option>
+                  <option value="المحاسبة">المحاسبة</option>
+                  <option value="الإدارة">الإدارة</option>
+                  <option value="أخرى">أخرى</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="notes">ملاحظات</label>
-                <textarea id="notes" rows="3"></textarea>
+                <textarea id="notes" name="notes" rows="3"></textarea>
               </div>
               <div class="form-actions">
                 <button
-                  type="button"
-                  class="btn btn-secondary"
-                  id="clear-fields"
+                  type="submit"
+                  class="btn btn-primary w-100"
+                  id="add-employee"
                 >
-                  مسح الحقول
-                </button>
-                <button type="button" class="btn btn-primary" id="add-employee">
                   إضافة الموظف
                 </button>
               </div>
@@ -154,15 +162,27 @@
             <div class="table-header">
               <h2>قائمة الموظفين</h2>
               <div class="table-actions">
-                <input
-                  type="text"
-                  class="search-input"
-                  id="search-employee"
-                  placeholder="بحث..."
-                />
-                <button class="btn btn-primary" id="update-employees">
-                  تحديث
-                </button>
+                <form id="search-number-form">
+                  <input
+                    type="text"
+                    name="phone"
+                    class="search-input"
+                    id="search-supplier"
+                    minlength="11"
+                    maxlength="11"
+                    pattern="^[0-9]{11}"
+                    title="رقم الهاتف يجب أن يحتوي على أرقام فقط ويكون 11 رقمًا"
+                    placeholder="بحث برقم الهاتف..."
+                    required
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="update-suppliers"
+                  >
+                    بحث
+                  </button>
+                </form>
               </div>
             </div>
             <div class="table-container">
@@ -170,7 +190,6 @@
                 <thead>
                   <tr>
                     <th>اسم الموظف</th>
-                    <th>المسمى الوظيفي</th>
                     <th>رقم الهاتف</th>
                     <th>القسم</th>
                     <th>الراتب</th>
@@ -189,7 +208,7 @@
     </div>
 
     <script src="../../sidebar.js"></script>
-    <script src="../../shared/shared.css"></script>
+    <script src="../../shared/shared.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

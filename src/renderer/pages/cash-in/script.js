@@ -74,13 +74,14 @@ filterDateForm.addEventListener("submit", async (e) => {
   const stats = await window.dbAPI.generalStatistics({ date: collected.date });
   const res = await window.dbAPI.getDocBySearch({
     modelName: "Safe",
-    filterOptions: { date: collected.date },
+    filterOptions: { date: collected.date, transactionType: "income" },
   });
 
   if (!res.success || !stats.success) {
     viewMessage("حدث خطأ اثناء البحث");
     return;
   }
+  console.log(stats);
   totalEl.innerText = stats.data.safeTotalIncomes.toLocaleString("en-us", {
     style: "currency",
     currency: "EGP",

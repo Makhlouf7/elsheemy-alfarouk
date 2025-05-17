@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>بروفايل الموظف</title>
     <link rel="stylesheet" href="../../style.css" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./view.css" />
     <link rel="stylesheet" href="../../assets/icons/icons.css" />
   </head>
   <body>
@@ -100,12 +100,39 @@
           <div class="employee-info-section">
             <h2>معلومات الموظف</h2>
             <div class="employee-info" id="employee-info">
-              <!-- Employee info will be loaded here -->
+              <div class="employee-info-item">
+                <h3>اسم الموظف</h3>
+                <p id="employee-name">---</p>
+              </div>
+              <div class="employee-info-item">
+                <h3>رقم الهاتف</h3>
+                <p id="employee-phone">---</p>
+              </div>
+              <div class="employee-info-item">
+                <h3>العنوان</h3>
+                <p id="employee-address">---</p>
+              </div>
+              <div class="employee-info-item">
+                <h3>القسم</h3>
+                <p id="employee-department">---</p>
+              </div>
+              <div class="employee-info-item">
+                <h3>الراتب الشهري</h3>
+                <p id="employee-salary">---</p>
+              </div>
+              <div class="employee-info-item">
+                <h3>تاريخ التعيين</h3>
+                <p id="employee-hire-date">---</p>
+              </div>
+              <div class="employee-info-item">
+                <h3>ملاحظات</h3>
+                <p id="employee-notes">---</p>
+              </div>
             </div>
           </div>
 
           <!-- Employee Transactions Section -->
-          <div class="transactions-section">
+          <!-- <div class="transactions-section">
             <div class="section-header">
               <h2>معاملات الموظف</h2>
             </div>
@@ -121,14 +148,12 @@
                   </tr>
                 </thead>
                 <tbody id="transactions-table-body">
-                  <!-- Transactions will be added here dynamically -->
                 </tbody>
               </table>
             </div>
             <div class="total-amount" id="total-amount">
-              <!-- Total amount will be displayed here -->
             </div>
-          </div>
+          </div> -->
 
           <!-- Attendance Section -->
           <div class="attendance-section">
@@ -156,7 +181,7 @@
       </main>
     </div>
 
-    <script src="script.js"></script>
     <script src="../../sidebar.js"></script>
+    <script src="./view.js"></script>
   </body>
 </html>
