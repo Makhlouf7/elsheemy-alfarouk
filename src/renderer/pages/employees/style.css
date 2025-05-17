@@ -7,6 +7,39 @@
   margin-right: 10px;
 }
 
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
 .employee-name-cell {
   display: flex;
   align-items: center;
@@ -30,11 +63,6 @@
 }
 
 /* Form layout for employee form */
-#employee-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
 
 #employee-form .form-group:nth-last-child(2),
 #employee-form .form-actions {
